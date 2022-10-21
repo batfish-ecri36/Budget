@@ -8,4 +8,8 @@ import store from './store';
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
