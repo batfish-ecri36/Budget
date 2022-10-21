@@ -13,6 +13,12 @@ if (process.env.NODE_ENV) {
   //   });
 }
 
+const userRouter = require('./routes/users');
+app.use('/api/users', userRouter);
+
+const expensesRouter = require('./routes/expenses');
+app.use('/api/expenses', expensesRouter);
+
 //start app on port
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
