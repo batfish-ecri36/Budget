@@ -28,17 +28,6 @@ const App = (props) => {
       </Routes>
     </BrowserRouter>
   );
-  // if (props.user) {
-  //   //   if user has active session, render this
-  //   return (
-  //     <div id='main'>
-  //       Logged in! <MainPage />
-  //     </div>
-  //   );
-  // } else {
-  //   //   else this
-  //   return <Login login={props.login} />;
-  // }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

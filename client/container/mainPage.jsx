@@ -1,6 +1,6 @@
 const React = require('react');
 import { useState } from 'react';
-import Transactions from '../components/Transactions';
+import Transactions from '../components/Transactions.jsx';
 
 // {
 //     date:

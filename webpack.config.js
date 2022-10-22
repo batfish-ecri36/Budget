@@ -9,10 +9,11 @@ module.exports = {
   devServer: {
     host: 'localhost',
     port: 8080,
-    proxy: {
-      '/signup': 'http://localhost:3000/signup',
-      '/main': 'http://localhost:3000/main',
-    },
+    historyApiFallback: true,
+    // proxy: {
+    //   '/signup': 'http://localhost:3000/signup',
+    //   '/main': 'http://localhost:3000/main',
+    // },
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
