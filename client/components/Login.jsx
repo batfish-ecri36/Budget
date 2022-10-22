@@ -22,9 +22,18 @@ const Login = (props) => {
       <button
         id='login-submit'
         onClick={() => {
-          const user = document.getElementById('username').value;
-          const pass = document.getElementById('password').value;
-          sendUser(user, pass, props.login);
+          const user = document.getElementById('username');
+          const pass = document.getElementById('password');
+          if (!user.value || !pass.value) {
+            if (!user.value) {
+              user.style.borderColor = 'red';
+            }
+            if (!pass.value) {
+              pass.style.borderColor = 'red';
+            }
+          } else {
+            sendUser(user.value, pass.value, props.login);
+          }
         }}
       >
         Login
