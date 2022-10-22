@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import { useState } from 'react';
 
 transactions: [
@@ -9,6 +9,8 @@ transactions: [
     category: '',
   },
 ];
+
+
 
 const Transactions = (props) => {
   return (
