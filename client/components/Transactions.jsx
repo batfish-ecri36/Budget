@@ -7,3 +7,9 @@ import { useState } from 'react';
 //     amount:
 //     category:
 // }]
+
+const Transactions = (props) => {
+  return <div className='transactions'></div>;
+};
+
+export default Transactions;
