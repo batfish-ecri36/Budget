@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 
 const transactionsRouter = require('./routes/transactions.js');
-//const userRouter = require('./routes/users');
+const userRouter = require('./routes/users');
 
 const app = express();
 const PORT = 3000;
@@ -19,7 +19,7 @@ if (process.env.NODE_ENV) {
 }
 
 
-//app.use('/users', userRouter);
+app.use('/users', userRouter);
 
 app.use('/transactions', transactionsRouter);
 

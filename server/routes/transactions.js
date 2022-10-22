@@ -11,15 +11,15 @@ router.get('/', transactionsController.getTransactions,
 
 router.post('/',
     transactionsController.addTransactions,
-  (req, res) => res.status(200).json({})
+  (req, res) => res.status(200).send("added")
 );
 
-router.put('/:id',
+router.put('/',
     transactionsController.updateTransactions,
-  (req, res) => res.status(200).send("updated")
+  (req, res) => res.status(200).json(res.locals.transactions)
 );
 
-router.delete('/:id',
+router.delete('/',
   transactionsController.deleteTransactions,
   (req, res) => res.status(200).send("deleted")
 );
