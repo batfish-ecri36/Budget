@@ -1,12 +1,17 @@
 const path = require('path');
 const express = require('express');
-
+const cors = require('cors');
 const transactionsRouter = require('./routes/transactions.js');
 const userRouter = require('./routes/users');
 
 const app = express();
 const PORT = 3000;
 
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -15,13 +20,15 @@ if (process.env.NODE_ENV) {
   //   app.get('/', (req, res) => {
   //     return res.status(200).sendFile(path.join(__dirname, './index.html'));
   //   });
- 
 }
-
 
 app.use('/users', userRouter);
 
 app.use('/transactions', transactionsRouter);
+
+app.get('/main', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../dist/index.html'));
+});
 
 app.use((req, res) => res.status(404).send('No page found'));
 

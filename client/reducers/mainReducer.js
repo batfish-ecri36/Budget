@@ -17,10 +17,10 @@ const mainReducer = (state = initialState, action) => {
   let transaction;
 
   switch (action.type) {
-    // case LOGIN: {
-    //   console.log(action.payload);
-    //   return { state };
-    // }
+    case types.LOGIN: {
+      const user = action.payload;
+      return { ...state, user };
+    }
     default: {
       return { ...state };
     }

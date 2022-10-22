@@ -3,14 +3,16 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
+// const navigate = useNavigate();
+
 const sendUser = async (user, pass, dispatch) => {
-  const response = await axios.get('/login', {
-    username: user,
-    password: pass,
+  const response = await axios.get('/users/login', {
+    params: { username: user, password: pass },
   });
   //create route to main page
-  const data = await response.json();
-  dispatch(data);
+  const data = response.data;
+  dispatch(response.data.username);
+  return;
 };
 
 const Login = (props) => {
@@ -33,7 +35,7 @@ const Login = (props) => {
               pass.style.borderColor = 'red';
             }
           } else {
-            sendUser(user.value, pass.value, props.login);
+            const data = sendUser(user.value, pass.value, props.login);
           }
         }}
       >
