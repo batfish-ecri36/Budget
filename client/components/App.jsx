@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import MainPage from '../container/mainPage.jsx';
 import Signup from './Signup.jsx';
+import BarChart from './Chart.jsx';
+
 
 const mapStateToProps = (state) => ({
   user: state.budget.user,
@@ -24,6 +26,7 @@ const App = (props) => {
           path='/main'
           element={<MainPage transactions={props.transactions} />}
         />
+        <Route path='/chart' element={<BarChart />}/>
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </BrowserRouter>
