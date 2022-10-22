@@ -6,6 +6,7 @@ import * as actions from '../actions/actions';
 import MainPage from '../container/mainPage.jsx';
 import Signup from './Signup.jsx';
 import MonthlyBarChart from './Chart.jsx';
+import DoughnutChart from './Doughnut.jsx';
 
 const mapStateToProps = (state) => ({
   user: state.budget.user,
@@ -31,6 +32,7 @@ const App = (props) => {
         element={<MainPage transactions={props.transactions} />}
       />
       <Route path='/chart' element={<MonthlyBarChart />} />
+      <Route path='/doughnut' element={<DoughnutChart />} />
       <Route path='/signup' element={<Signup />} />
     </Routes>
   );
