@@ -9,6 +9,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import axios from 'axios';
 
 ChartJS.register(
     CategoryScale, 
@@ -18,6 +19,7 @@ ChartJS.register(
     Tooltip,
     Legend
 ); 
+
 
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 //dataset's data would be pull in from the backend
