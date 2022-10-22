@@ -1,6 +1,7 @@
 const React = require('react');
 import { useState } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const sendUser = async (user, pass, dispatch) => {
   const response = await axios.get('/login', {

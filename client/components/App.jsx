@@ -1,10 +1,12 @@
-const React = require('react');
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login.jsx';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import MainPage from '../container/mainPage.jsx';
 import Signup from './Signup.jsx';
+import MonthlyBarChart from './Chart.jsx';
+
 
 const mapStateToProps = (state) => ({
   user: state.budget.user,
@@ -24,6 +26,7 @@ const App = (props) => {
           path='/main'
           element={<MainPage transactions={props.transactions} />}
         />
+        <Route path='/chart' element={<MonthlyBarChart />}/>
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </BrowserRouter>
