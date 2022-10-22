@@ -3,14 +3,17 @@ const db = require('../models/budgetModel');
 const transactionsController = {};
 
 transactionsController.addTransactions = (req, res, next) => {
-    console.log("add transactions")
-    const { newTransactions } = req.body
-    const text = `INSERT INTO transactions (id, user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5, $6)`;
+
+    const newTransactions = []
+    for (let key in req.body) {
+      newTransactions.push(req.body[key]);
+    }
+    const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
     db.query(text, newTransactions, (err, res) => {
         if (err) {
           console.log(err.stack)
         } else {
-          console.log(res.rows[0])
+          console.log("added to database")
     }});
     
     next();
@@ -18,11 +21,12 @@ transactionsController.addTransactions = (req, res, next) => {
 
 transactionsController.getTransactions = async (req, res, next) => {
   console.log("get transactions")
-  const queryString = req.query.id;
-  const text =`SELECT t.* FROM transactions t WHERE t.user_id=1`
+  const queryString = req.body.user_id;
+  console.log(queryString);
+  const text =`SELECT * FROM transactions WHERE user_id=${queryString} LIMIT 10;`
   const result = await db.query(text)
   .then((data) => {
-    res.locals.transactions = data.rows[0];
+    res.locals.transactions = data.rows;
   })
   .catch((error) => {
     console.log("Error getTransactions",error);
@@ -32,8 +36,8 @@ transactionsController.getTransactions = async (req, res, next) => {
 };
 
 transactionsController.deleteTransactions = async (req, res, next) => {
-    const queryString = req.query.id;
-    const text ='DELETE FROM transactions WHERE id=${queryString}' 
+    const queryString = req.body._id;
+    const text =`DELETE FROM transactions WHERE _id=${queryString}` 
     const result = await db.query(text)
     .then((data) => {
       res.locals.transactions = data;
@@ -46,8 +50,10 @@ transactionsController.deleteTransactions = async (req, res, next) => {
 };
 
 transactionsController.updateTransactions = async (req, res, next) => {
-    const queryString = req.query.id;
-    const text = `UPDATE transactionsSET item = '${req.body.item}' amount = '${req.body.amount}'  WHERE id = ${queryString}`;
+    const queryString = req.body._id;
+    console.log(queryString);
+    console.log(req.body);
+    const text = `UPDATE transactions SET item = '${req.body.item}', amount = '${req.body.amount}', date = '${req.body.date}', category = '${req.body.category}' WHERE _id = ${queryString}`;
     const result = await db.query(text)
     .then((data) => {
       res.locals.transactions = data;
