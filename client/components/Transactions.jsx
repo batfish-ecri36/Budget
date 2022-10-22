@@ -1,16 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 
-transactions: [
-  {
-    date: '',
-    item: '',
-    amount: '',
-    category: '',
-  },
-];
-
-
+// transactions: [
+//   {
+//     date: '',
+//     item: '',
+//     amount: '',
+//     category: '',
+//   },
+// ];
 
 const Transactions = (props) => {
   return (
