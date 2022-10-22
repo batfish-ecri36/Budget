@@ -6,13 +6,19 @@ import axios from 'axios';
 // const navigate = useNavigate();
 
 const sendUser = async (user, pass, dispatch) => {
-  const response = await axios.get('/users/login', {
-    params: { username: user, password: pass },
-  });
-  //create route to main page
-  const data = response.data;
-  dispatch(response.data.username);
-  return;
+  try{
+    const response = await axios.get('/users/login', {
+      params: { username: user, password: pass },
+    });
+    //create route to main page
+    const data = response.data;
+    dispatch(response.data.username);
+    console.log(data)
+    return;
+  }
+  catch(err){
+    console.log(err);
+  }  
 };
 
 const Login = (props) => {

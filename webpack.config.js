@@ -10,10 +10,13 @@ module.exports = {
     host: 'localhost',
     port: 8080,
     historyApiFallback: true,
-    // proxy: {
-    //   '/signup': 'http://localhost:3000/signup',
-    //   '/main': 'http://localhost:3000/main',
-    // },
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: {
+      '/users/': {
+        target: 'http://localhost:3000',
+        secure: false,
+      },
+    },
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
