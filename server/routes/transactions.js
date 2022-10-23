@@ -12,7 +12,8 @@ router.get('/:id',
     res.status(200).json(res.locals.transactions)}
 );
 
-router.post('/',
+
+router.post('/:id',
   cryptoController.encryptData,
   transactionsController.addTransactions,
   (req, res) => res.status(200).send("added")
