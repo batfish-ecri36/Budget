@@ -6,7 +6,7 @@ router.get('/', usersController.getUsers, (req, res) =>
   res.status(200).send(res.locals.users)
 );
 
-router.get('/login', usersController.verifyUser, 
+router.post('/login', usersController.verifyUser, 
   usersController.addTransactions, (req, res) => {
   return res.status(200).json(res.locals.user);
 });

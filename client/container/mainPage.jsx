@@ -1,6 +1,10 @@
 const React = require('react');
 import { useState } from 'react';
 import Transactions from '../components/Transactions.jsx';
+import Monthly from '../components/Monthly.jsx'
+import Yearly from '../components/Yearly.jsx'
+import Weekly from '../components/Weekly.jsx'
+
 
 transactions: [
   {
@@ -10,6 +14,8 @@ transactions: [
     category: '',
   },
 ];
+
+
 
 const MainPage = (props) => {
   const transArray = [];
@@ -42,7 +48,7 @@ const MainPage = (props) => {
           </label>
           <div id='trans-display'></div>
           {transArray}
-          <input id='new-trans'></input> <a id='add-butt'>Add Transaction</a>
+          <Weekly />
         </div>
         <div id='graph'></div>
       </div>
@@ -68,7 +74,7 @@ const MainPage = (props) => {
             </label>
             <div id='trans-display'></div>
             {transArray}
-            <input id='new-trans'></input> <a id='add-butt'>Add Transaction</a>
+            <Monthly />
           </div>
           <div id='graph'></div>
         </div>
@@ -94,7 +100,7 @@ const MainPage = (props) => {
           </label>
           <div id='trans-display'></div>
           {transArray}
-          <input id='new-trans'></input> <a id='add-butt'>Add Transaction</a>
+          <Yearly />
         </div>
         <div id='graph'></div>
         <div id='summary'></div>

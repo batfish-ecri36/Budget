@@ -33,11 +33,11 @@ usersController.addTransactions = async (req, res, next) => {
 usersController.verifyUser = async (req, res, next) => {
 
     const array = [req.body.username];
+    console.log(array);
     const text = `SELECT _id, username, password, token FROM users WHERE username=$1`;
     const login = await db.query(text, array)
         .then((data) => {
             const hash = data.rows[0].password;
-          
             const correctPassword = bcrypt.compare(req.body.password, hash, function(err, result) {
                 if (data.rows.length > 0 && result) {
                     
