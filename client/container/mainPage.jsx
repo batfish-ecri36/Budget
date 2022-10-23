@@ -38,92 +38,48 @@ const MainPage = (props) => {
     setTransactions(data);
   };
 
-  console.log('transactions:', transactions)
-  
-
   useEffect(() => {
     getExpenses();
   }, []);
 
-  const [display, setDisplay] = useState("week");
-  if (display === "week") {
-    return (
-      <div>
-        <h1>Peter and Andy are also great!</h1>
-        <div>
-          Week
-          <label htmlFor="list-type">
-            <select
-              id="list-type"
-              onChange={(event) => {
-                setDisplay(event.target.value);
-              }}
-            >
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="year">Year</option>
-            </select>
-          </label>
-          <div id="trans-display"></div>
-          {transArray}
-          <Weekly />
+  return (
+    <div>
+      <h1>Peter and Andy are great too!</h1>
+        <form onSubmit={(()=> console.log('submit'))}>
+          <input onChange={(()=> console.log('enter expense'))} type='text' placeholder='Expense'></input>
+          <input onChange={(()=> console.log('enter amount'))} type='number' placeholder='Amount'></input>
+          <input onChange={(()=> console.log('submit'))} type='date'></input>
+          <input type='submit'></input>
+        </form>
+        <div className='expense-log' style={{ marginTop: "50px" }}>
+          <table className='expense-table'>
+            <thead>
+              <tr>
+                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676'}}>Expense:</th>
+                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Amount:</th>
+                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Date:</th>
+                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Action:</th>
+              </tr>
+            </thead>
+          </table>
+          <tbody>
+            {transactions && transactions.map((item, index) => {
+              return (
+                <tr key={index}>
+                  <td style={{ paddingRight: '10px'}}>{item.item}</td>
+                  <td style={{ paddingRight: '10px'}}>${item.amount}</td>
+                  <td style={{ paddingRight: '10px'}}>{item.date}</td>
+                  <td style={{ paddingRight: '10px'}} className='action-btn'>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
         </div>
-        <div id="graph"></div>
-      </div>
-    );
-  } else if (display === "month") {
-    if (display === "month") {
-      return (
-        <div>
-          <h1>Peter and Andy are also great!</h1>
-          <div>
-            Month
-            <label htmlFor="list-type">
-              <select
-                id="list-type"
-                onChange={(event) => {
-                  setDisplay(event.target.value);
-                }}
-              >
-                <option value="week">Week</option>
-                <option value="month">Month</option>
-                <option value="year">Year</option>
-              </select>
-            </label>
-            <div id="trans-display"></div>
-            {transArray}
-            <Monthly />
-          </div>
-          <div id="graph"></div>
-        </div>
-      );
-    }
-  } else if (display === "year") {
-    return (
-      <div>
-        <h1>Peter and Andy are also great!</h1>
-        <div>
-          Year
-          <label htmlFor="list-type">
-            <select
-              id="list-type"
-              onChange={(event) => {
-                setDisplay(event.target.value);
-              }}
-            >
-              <option value="week">Week</option>
-              <option value="month">Month</option>
-              <option value="year">Year</option>
-            </select>
-          </label>
-          <div id="trans-display"></div>
-          {transArray}
-          <Yearly />
-        </div>
-        <div id="graph"></div>
-        <div id="summary"></div>
-      </div>
-    );
-  }
-};
+    </div>
+  )
+
+}
 export default MainPage;
