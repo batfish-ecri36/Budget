@@ -5,7 +5,7 @@ const cryptoController = require('../controllers/cryptoController');
 
 const router = express.Router();
 
-router.get('/', 
+router.get('/:id', 
   transactionsController.getTransactions,
   cryptoController.decryptData,
   (req, res) => {

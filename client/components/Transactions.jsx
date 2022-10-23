@@ -10,7 +10,7 @@ import { useState } from 'react';
 //   },
 // ];
 
-const Transactions = (props) => {
+const Transactions = ({date, item, amount, category}) => {
   return (
     <div className='transactions'>
       <div>

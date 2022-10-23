@@ -6,12 +6,15 @@ import axios from 'axios';
 // const navigate = useNavigate();
 
 const sendUser = async (user, pass, dispatch) => {
-  const response = await axios.get('/users/login', {
-    params: { username: user, password: pass },
-  });
+  const userData = {username: user, password: pass}
+  const response = await axios.post('/users/login', userData);
+  //all the data associated with that username
+  // const data = response.data[1];
+  //username
+  // const username = response.data[0].username;
   //create route to main page
-  const data = response.data;
-  dispatch(response.data.username);
+  // dispatch(username);
+  dispatch(response);
   return;
 };
 
