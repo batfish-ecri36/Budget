@@ -20,10 +20,9 @@ transactionsController.addTransactions = (req, res, next) => {
 };
 
 transactionsController.getTransactions = async (req, res, next) => {
-  console.log("get transactions")
+
   const queryString = req.body.user_id;
-  console.log(queryString);
-  const text =`SELECT * FROM transactions WHERE user_id=${queryString} LIMIT 10;`
+  const text =`SELECT * FROM transactions WHERE user_id=${queryString};`
   const result = await db.query(text)
   .then((data) => {
     res.locals.transactions = data.rows;
