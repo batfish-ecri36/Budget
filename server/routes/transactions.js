@@ -1,16 +1,20 @@
 const express = require('express');
 
 const transactionsController = require('../controllers/transactionsController');
+const cryptoController = require('../controllers/cryptoController');
 
 const router = express.Router();
 
-router.get('/', transactionsController.getTransactions,
+router.get('/', 
+  transactionsController.getTransactions,
+  cryptoController.decryptData,
   (req, res) => {
     res.status(200).json(res.locals.transactions)}
 );
 
 router.post('/',
-    transactionsController.addTransactions,
+  cryptoController.encryptData,
+  transactionsController.addTransactions,
   (req, res) => res.status(200).send("added")
 );
 
