@@ -4,7 +4,8 @@ const transactionsController = require('../controllers/transactionsController');
 
 const router = express.Router();
 
-router.get('/', transactionsController.getTransactions,
+//fixed the endpoint to request an endpoint with an id 
+router.get('/:id', transactionsController.getTransactions,
   (req, res) => {
     res.status(200).json(res.locals.transactions)}
 );

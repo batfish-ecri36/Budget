@@ -20,9 +20,12 @@ transactionsController.addTransactions = (req, res, next) => {
 };
 
 transactionsController.getTransactions = async (req, res, next) => {
-
+  //fixed the query string to accept passed in params 
+  const id = req.params.id
+  //cannot use req.body because we can't send a response body from the front
+  //end with a get request (only from a post request)
   const queryString = req.body.user_id;
-  const text =`SELECT * FROM transactions WHERE user_id=${queryString};`
+  const text =`SELECT * FROM transactions WHERE user_id=${id};`
   const result = await db.query(text)
   .then((data) => {
     res.locals.transactions = data.rows;

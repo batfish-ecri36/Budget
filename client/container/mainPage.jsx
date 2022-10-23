@@ -17,6 +17,10 @@ const MainPage = (props) => {
     />;
   });
 
+  console.log(props)
+  //will find a way to access user id, but for now i hard coded it
+  const id = 11;
+
   const [transactions, setTransactions] = useState([]);
 
   //how to access the current user in state?
@@ -27,10 +31,14 @@ const MainPage = (props) => {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({})
     };
-    const response = await fetch("http://localhost:3000/transactions");
+    //can only access data from back by send a get request with an id passed in
+    const response = await fetch(`/transactions/${id}`);
     const data = await response.json();
+    console.log(data);
     setTransactions(data);
   };
+
+  console.log('transactions:', transactions)
   
 
   useEffect(() => {
