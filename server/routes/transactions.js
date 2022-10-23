@@ -10,7 +10,8 @@ router.get('/:id', transactionsController.getTransactions,
     res.status(200).json(res.locals.transactions)}
 );
 
-router.post('/',
+//fixed the endpoint to request an endpoint with an id 
+router.post('/:id',
     transactionsController.addTransactions,
   (req, res) => res.status(200).send("added")
 );

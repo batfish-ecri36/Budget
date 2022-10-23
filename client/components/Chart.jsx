@@ -26,6 +26,7 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 
 
+
 const MonthlyBarChart = () => {
     const [chartData, setChartData] = useState({
         datasets: []

@@ -6,6 +6,13 @@ import Yearly from "../components/Yearly.jsx";
 import Weekly from "../components/Weekly.jsx";
 import axios from "axios";
 
+const initialState = {
+  item: '',
+  amount: '',
+  date: '',
+  category: '',
+}
+
 const MainPage = (props) => {
   const transArray = [];
   props.transactions.forEach((transaction) => {
@@ -17,9 +24,11 @@ const MainPage = (props) => {
     />;
   });
 
-  console.log(props)
   //will find a way to access user id, but for now i hard coded it
   const id = 11;
+
+  const [state, setState] = useState(initialState);
+  const { item, amount, date, category} = initialState;
 
   const [transactions, setTransactions] = useState([]);
 
@@ -38,17 +47,48 @@ const MainPage = (props) => {
     setTransactions(data);
   };
 
+  //post request to add new transactions to the database
+  const addExpense = async (data) => {
+    console.log(data);
+    try {
+      const response = await axios.post(`/transactions/${id}`, data);
+      if(response.status === 200){
+        window.alert('Expense added successfully!');
+      }
+    }
+    catch(err) {
+      console.log(err)
+    }
+  }
+
   useEffect(() => {
     getExpenses();
   }, []);
 
+  //handleSubmit form to invoke addExpense function (post request) passing in the new state
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (item === null || amount === null || date === null) {
+      window.alert("Please provide value into each input fields.");
+    } else {
+      addExpense(state)
+    }
+  };
+
+  //handle input onChange
+  const handleInputChange = (e) => {
+    let { name, value } = e.target;
+    setState({ ...state, [name]: value });
+  };
+
   return (
     <div>
       <h1>Peter and Andy are great too!</h1>
-        <form onSubmit={(()=> console.log('submit'))}>
-          <input onChange={(()=> console.log('enter expense'))} type='text' placeholder='Expense'></input>
-          <input onChange={(()=> console.log('enter amount'))} type='number' placeholder='Amount'></input>
-          <input onChange={(()=> console.log('submit'))} type='date'></input>
+        <form onSubmit={handleSubmit}>
+          <input onChange={handleInputChange} type='text' placeholder='Expense' name='expense' defaultValue={item}></input>
+          <input onChange={handleInputChange} type='number' placeholder='Amount' name='amount' defaultValue={amount}></input>
+          <input onChange={handleInputChange} type='text' placeholder='Category' name='Category' defaultValue={category}></input>
+          <input onChange={handleInputChange} type='date' name='date' defaultValue={date}></input>
           <input type='submit'></input>
         </form>
         <div className='expense-log' style={{ marginTop: "50px" }}>
@@ -58,6 +98,7 @@ const MainPage = (props) => {
                 <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676'}}>Expense:</th>
                 <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Amount:</th>
                 <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Date:</th>
+                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Category:</th>
                 <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Action:</th>
               </tr>
             </thead>
@@ -68,6 +109,7 @@ const MainPage = (props) => {
                 <tr key={index}>
                   <td style={{ paddingRight: '10px'}}>{item.item}</td>
                   <td style={{ paddingRight: '10px'}}>${item.amount}</td>
+                  <td style={{ paddingRight: '10px'}}>{item.category}</td>
                   <td style={{ paddingRight: '10px'}}>{item.date}</td>
                   <td style={{ paddingRight: '10px'}} className='action-btn'>
                     <button>Edit</button>
