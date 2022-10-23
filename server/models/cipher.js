@@ -30,10 +30,4 @@ cipher.decrypt = (key, encryptedData) => {
     return decrypted;
 }
 
-// const key = cipher.keyFromPassword('Our password');
-// console.log(key);
-// const encryptedTest = cipher.encrypt(key, 'This is a test');
-// console.log(encryptedTest);
-// console.log( cipher.decrypt(key,  encryptedTest) ); 
-
 module.exports = cipher;

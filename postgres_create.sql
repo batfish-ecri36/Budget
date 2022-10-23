@@ -31,3 +31,17 @@
 -- ) WITH (
 --   OIDS=FALSE
 -- );
+
+-- CREATE TABLE public.encrypted_transactions (
+-- 	"_id" serial NOT NULL,
+-- 	"user_id" int NOT NULL,
+-- 	"item" varchar NOT NULL,
+--     "amount" DECIMAL(19,4) not NULL,
+--     "date" DATE,
+--     "category" varchar NOT NULL,
+-- 	CONSTRAINT "encrypted_transactions_pk" PRIMARY KEY ("_id"),
+--     CONSTRAINT "encrypted_transactions_fk0" FOREIGN KEY ("user_id") REFERENCES  public.users("_id")
+-- ) WITH (
+--   OIDS=FALSE
+-- );
+

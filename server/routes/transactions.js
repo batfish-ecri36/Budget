@@ -19,7 +19,8 @@ router.post('/',
 );
 
 router.put('/',
-    transactionsController.updateTransactions,
+  cryptoController.encryptData,
+  transactionsController.updateTransactions,
   (req, res) => res.status(200).json(res.locals.transactions)
 );
 
