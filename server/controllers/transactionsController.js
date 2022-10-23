@@ -3,8 +3,10 @@ const db = require('../models/budgetModel');
 const transactionsController = {};
 
 transactionsController.addTransactions = (req, res, next) => {
-
-    const newTransactions = []
+    //add params id so we can target which user to add the expense to 
+    const {id} = req.params
+    //adding the id as the first element to newTransactions
+    const newTransactions = [id]
     for (let key in req.body) {
       newTransactions.push(req.body[key]);
     }
