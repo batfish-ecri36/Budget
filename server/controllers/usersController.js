@@ -69,9 +69,9 @@ usersController.verifyUser = async (req, res, next) => {
 };
 
 usersController.createUser = async (req, res, next) => {
+  console.log(req);
   const saltRounds = 10;
   const password = req.body.password;
-
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(password, salt, function (err, hash) {
       const user = {
