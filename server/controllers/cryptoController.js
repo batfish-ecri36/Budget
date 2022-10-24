@@ -37,10 +37,13 @@ cryptoController.decryptData = async (req, res, next) => {
     });
 
   const key = cipher.keyFromPassword(password);
-  res.locals.transactions.forEach(
-    (element) => (element.item = cipher.decrypt(key, element.item))
-  );
-
+  res.locals.transactions.forEach((element) => {
+    element.item = cipher.decrypt(key, element.item);
+  });
+  if (res.locals.user) {
+    // console.log('decrypting locals data');
+    res.locals.user[1] = res.locals.transactions;
+  }
   next();
 };
 
