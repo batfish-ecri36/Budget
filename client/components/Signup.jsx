@@ -4,7 +4,6 @@ import style from '../styles/signup.scss';
 import axios from 'axios';
 
 const createUser = async (user, pass) => {
-  console.log(user, pass);
   const response = await axios.post('/users/signup', {
     username: user,
     password: pass,
@@ -58,11 +57,9 @@ const Signup = (props) => {
                     confirm.style.borderColor = 'red';
                   }
                 } else {
-                  console.log('hi');
                   if (pass.value !== confirm.value) {
                     confirm.style.borderColor = 'red';
                   } else {
-                    console.log('here');
                     createUser(user.value, pass.value);
                   }
                 }
