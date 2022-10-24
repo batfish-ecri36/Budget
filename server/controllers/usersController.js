@@ -17,11 +17,10 @@ usersController.getUsers = async (req, res, next) => {
 };
 
 usersController.addTransactions = async (req, res, next) => {
-    const text = `SELECT * FROM transactions WHERE user_id=${res.locals.userID} ORDER BY date ASC`;
+    const text = `SELECT * FROM encrypted_transactions WHERE user_id=${res.locals.userID} ORDER BY date ASC`;
 
     const transactions = await db.query(text)
         .then((data) => {
-            res.locals.user.push(data.rows);
             res.locals.transactions = data.rows;
             req.params.id = res.locals.userID;
         })
