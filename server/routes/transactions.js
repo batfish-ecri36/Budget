@@ -25,7 +25,7 @@ router.post(
 
 router.put(
   '/:id',
-  // cryptoController.encryptData,
+  cryptoController.encryptData,
   transactionsController.updateTransactions,
   (req, res) => res.status(200).json(res.locals.transactions)
 );
