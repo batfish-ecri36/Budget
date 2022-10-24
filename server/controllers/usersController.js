@@ -80,7 +80,7 @@ usersController.createUser = async (req, res, next) => {
       };
 
       res.locals.username = user.username;
-      console.log("aa");
+      console.log('aa');
       console.log(res.locals.username);
       const newEncryptedUser = [];
 
@@ -107,19 +107,18 @@ usersController.createUser = async (req, res, next) => {
   //next();
 };
 
-
 usersController.sendUser = async (req, res, next) => {
   const username = [req.body.username];
-  const text =`SELECT * FROM users WHERE username=$1`
-  const result = await db.query(text, username)
-  .then((data) => {
-
-    res.locals.user = [data.rows[0]];
-    res.locals.user.push([]);
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  }
+  const text = `SELECT * FROM users WHERE username=$1`;
+  const result = await db
+    .query(text, username)
+    .then((data) => {
+      res.locals.user = [data.rows[0]];
+      res.locals.user.push([]);
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };

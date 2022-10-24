@@ -13,10 +13,6 @@ const mainReducer = (state = initialState, action) => {
       console.log(action.payload, 'payload');
       const user = action.payload[0];
       transactions = action.payload[1];
-      console.log(transactions);
-      // transactions = transactions.sort((a, b) => {
-      //   return new Date(a.date) - new Date(b.date);
-      // });
       return { ...state, user, transactions };
     }
     case types.ADD_TRANSACTION: {
@@ -48,6 +44,7 @@ const mainReducer = (state = initialState, action) => {
     }
     case types.UPDATE_TRANSACTION: {
       transactions = state.transactions.slice();
+      console.log(action.payload);
       let current;
       for (let i = 0; i < transactions.length; i++) {
         if (transactions[i]._id === action.payload._id) {
