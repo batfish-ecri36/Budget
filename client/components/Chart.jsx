@@ -53,21 +53,27 @@ const MonthlyBarChart = ({transactions}) => {
       };
 
 
-    const transData = {};  
-    const trans = transactions.forEach(item => {
+    const transData = {}; 
+
+    // const addToTrans = transactions.forEach(item => {
+    //     if(!transData.hasOwnProperty(item.date)){
+    //         transData[convertDate(item.date)] = Number(item.amount);
+    //     } else {
+    //         transData[convertDate(item.date)] = +Number(item.amount);
+    //     }
+    // })
+    //had to do two forEach in order to add value to the property || not sure why the first method didn't work
+    const setDate = transactions.forEach(item => {
         if(!transData.hasOwnProperty(item.date)){
             transData[convertDate(item.date)] = 0;
-            transData[convertDate(item.date)] += Number(item.amount)
-        }
-        console.log(transData[convertDate(item.date)])
-        transData[convertDate(item.date)] += Number(item.amount)
-        console.log('line 67', item.amount) 
+        } 
     })
-    console.log('line 71',transData)
+    const setAmount = transactions.forEach(item => {
+        transData[convertDate(item.date)] += Number(item.amount);
+    })
 
     const labels = Object.keys(transData);
     const tableData = Object.values(transData);
-    console.log('line 75',tableData);
 
     const [chartOptions, setChartOptions] = useState({});
 
