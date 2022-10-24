@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import Monthly from '../components/Monthly.jsx';
 import Yearly from '../components/Yearly.jsx';
 import Weekly from '../components/Weekly.jsx';
+import Popup from '../components/Popup.jsx';
 import axios from 'axios';
 import MonthlyBarChart from '../components/Chart.jsx';
 import DoughnutChart from '../components/Doughnut.jsx';
 import styles from '../styles/mainpage.scss'
+
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -34,7 +36,6 @@ const MainPage = (props) => {
       }
       props.addTrans(data);
       const arrBox = Array.from(document.getElementsByClassName('addbox'));
-      console.log(arrBox);
       arrBox.forEach((ele) => {
         ele.value = '';
       });
@@ -83,23 +84,32 @@ const MainPage = (props) => {
   };
 
   const deleteExpense = async (data) => {
-    console.log(data);
     try {
-      const response = await axios.delete(`/transactions/${props.user._id}`, {
+      const response = await axios.delete(`/transactions/${data}`, {
         data,
       });
-      // props.deleteTrans(data)
+      props.deleteTrans(data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [updateData, setUpdateData] = useState({});
+
   return (
     <div>
       <div>
-        <MonthlyBarChart transactions={props.transactions}/>
+        <MonthlyBarChart transactions={props.transactions} />
         <DoughnutChart transactions={props.transactions} />
       </div>
+      <Popup
+        trigger={buttonPopup}
+        update={updateData}
+        setTrigger={setButtonPopup}
+      >
+        <h3>POPUP</h3>
+      </Popup>
       <h1>Peter and Andy are great too!</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -141,7 +151,11 @@ const MainPage = (props) => {
         ></input>
         <input type='submit'></input>
       </form>
-      <div className='expense-log' style={{ marginTop: '50px' }}>
+      <div
+        id='expense-div'
+        className='expense-log'
+        style={{ marginTop: '50px' }}
+      >
         <table className='expense-table'>
           <thead>
             <tr>
@@ -209,21 +223,15 @@ const MainPage = (props) => {
                   <td style={{ paddingRight: '10px' }} className='action-btn'>
                     <button
                       onClick={() => {
-                        console.log('click');
+                        setUpdateData(item);
+                        setButtonPopup(true);
                       }}
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => {
-                        console.log(item.item, convertDate(item.date));
-                        const toDelete = {
-                          item: item.item,
-                          date: item.date,
-                          category: item.category,
-                          amount: item.amount,
-                        };
-                        deleteExpense(toDelete);
+                        deleteExpense(item._id);
                       }}
                     >
                       Delete
@@ -246,4 +254,3 @@ export default MainPage;
   <option value='year'>Year</option>
 </select>; */
 }
-
