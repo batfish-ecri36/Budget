@@ -1,5 +1,6 @@
 const express = require('express');
 const usersController = require('../controllers/usersController');
+const cryptoController = require('../controllers/cryptoController');
 const router = express.Router();
 
 router.get('/', usersController.getUsers, (req, res) =>
