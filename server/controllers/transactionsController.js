@@ -9,13 +9,6 @@ transactionsController.addTransactions = (req, res, next) => {
   const { item, amount, date, category } = req.body;
   //adding the id as the first element to newTransactions
   const newTransactions = [id, item, amount, date, category];
-  const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
-  db.query(text, newTransactions, (err, res) => {
-    if (err) {
-      console.log(err.stack);
-    } else {
-      console.log('added to database');
-    }
     console.log(newTransactions);
     const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
     db.query(text, newTransactions, (err, res) => {
@@ -23,10 +16,10 @@ transactionsController.addTransactions = (req, res, next) => {
           console.log(err.stack)
         } else {
           console.log("added to database")
-    }});
-    
+      }
+    });
     next();
-
+  
 };
 
 transactionsController.getTransactions = async (req, res, next) => {
