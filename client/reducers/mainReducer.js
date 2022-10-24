@@ -10,11 +10,13 @@ const mainReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.LOGIN: {
+      console.log(action.payload, 'payload');
       const user = action.payload[0];
       transactions = action.payload[1];
-      transactions = transactions.sort((a, b) => {
-        return new Date(a.date) - new Date(b.date);
-      });
+      console.log(transactions);
+      // transactions = transactions.sort((a, b) => {
+      //   return new Date(a.date) - new Date(b.date);
+      // });
       return { ...state, user, transactions };
     }
     case types.ADD_TRANSACTION: {

@@ -13,7 +13,7 @@ const MainPage = (props) => {
     amount: '',
     date: '',
   });
-  const [display, setDisplay] = useState('all');
+  // const [display, setDisplay] = useState('all');
 
   console.log(props);
   //will find a way to access user id, but for now i hard coded it
