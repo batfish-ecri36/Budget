@@ -8,16 +8,16 @@ transactionsController.addTransactions = (req, res, next) => {
   const { item, amount, date, category } = req.body;
   //adding the id as the first element to newTransactions
   const newTransactions = [id, item, amount, date, category];
-  console.log(newTransactions);
-  const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
-  db.query(text, newTransactions, (err, res) => {
-    if (err) {
-      console.log(err.stack);
-    } else {
-      console.log('added to database');
-    }
-  });
-  next();
+    console.log(newTransactions);
+    const text = `INSERT INTO encrypted_transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
+    db.query(text, newTransactions, (err, res) => {
+        if (err) {
+          console.log(err.stack)
+        } else {
+          console.log("added to database")
+      }
+    });
+    next();
 };
 
 transactionsController.getTransactions = async (req, res, next) => {
@@ -42,9 +42,10 @@ transactionsController.getTransactions = async (req, res, next) => {
 
 transactionsController.deleteTransactions = async (req, res, next) => {
   const { id } = req.params;
-  //This needs to be edited to delete specific transactions by looking for item and date :))
+  const { item, date } = req.body;
+  console.log(item, date);
 
-  const text = `DELETE FROM transactions WHERE _id=${id}`;
+  const text = `DELETE FROM encrypted_transactions WHERE _id=${queryString}`;
   const result = await db
     .query(text)
     .then((data) => {
@@ -58,9 +59,10 @@ transactionsController.deleteTransactions = async (req, res, next) => {
 };
 
 transactionsController.updateTransactions = async (req, res, next) => {
-  const { id } = req.params;
-  const { item, amount, date, category } = req.body.data;
-  const text = `UPDATE transactions SET item = '${item}', amount = '${amount}', date = '${date}', category = '${category}' WHERE _id = ${id}`;
+  const queryString = req.params._id;
+  console.log(queryString);
+  console.log(req.body);
+  const text = `UPDATE encrypted_transactions SET item = '${req.body.item}', amount = '${req.body.amount}', date = '${req.body.date}', category = '${req.body.category}' WHERE _id = ${queryString}`;
   const result = await db
     .query(text)
     .then((data) => {
