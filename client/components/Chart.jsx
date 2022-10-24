@@ -79,6 +79,9 @@ const MonthlyBarChart = ({ transactions }) => {
     responsive: true,
     plugins: {
       legend: {
+        labels: {
+          fontColor: '#4be7b9',
+        },  
         position: "bottom",
       },
       title: {
@@ -101,8 +104,8 @@ const MonthlyBarChart = ({ transactions }) => {
   }
   
   return (
-    <div style={{ width: "700px", margin: "auto auto" }}>
-      <h1>Bar Chart Display</h1>
+    <div style={{ width: "700px", margin: "auto auto", color:'#4be7b9'}}>
+      <h2>Bar Chart Display</h2>
       <Bar options={options} data={barData} />
     </div>
   );
