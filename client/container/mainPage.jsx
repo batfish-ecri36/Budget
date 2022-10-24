@@ -6,6 +6,9 @@ import Weekly from '../components/Weekly.jsx';
 import Popup from '../components/Popup.jsx';
 import axios from 'axios';
 import MonthlyBarChart from '../components/Chart.jsx';
+import DoughnutChart from '../components/Doughnut.jsx';
+import styles from '../styles/mainpage.scss'
+
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -16,6 +19,8 @@ const MainPage = (props) => {
   });
   const [display, setDisplay] = useState('all');
 
+
+  console.log(props);
   //will find a way to access user id, but for now i hard coded it
   const id = props.user.id;
 
@@ -96,6 +101,7 @@ const MainPage = (props) => {
     <div>
       <div>
         <MonthlyBarChart transactions={props.transactions} />
+        <DoughnutChart transactions={props.transactions} />
       </div>
       <Popup
         trigger={buttonPopup}

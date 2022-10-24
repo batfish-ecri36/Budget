@@ -81,5 +81,18 @@ button {
 
 button:hover {
     background-color:#34d2a3;
+    cursor: pointer;
+}
+
+#login-anchor {
+    color: #4be7b9
+}
+
+#login-anchor:hover{
+    color: #34d2a3;
+}
+
+#login-anchor:visited{
+    color: #37b18c
 }
 
