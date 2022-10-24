@@ -23,15 +23,10 @@ const Popup = (props) => {
       if (amount) {
         sendObj.amount = amount;
       }
-
-      //   console.log(sendObj);
-
       data = Object.assign({}, data, sendObj);
-      console.log(data);
-
-      const response = await axios.put(`/transactions/${data._id}`, {
-        data,
-      });
+      console.log('data', data);
+      console.log(data.user_id);
+      const response = await axios.put(`/transactions/${data.user_id}`, data);
     } catch (error) {
       console.log(error);
     }
