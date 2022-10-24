@@ -20,6 +20,10 @@ body {
   
 }
 
+#login h1 {
+    color:#4be7b9;
+}
+
 #inner-login p {
     text-align: center;
     margin-bottom: 20px;
@@ -65,12 +69,12 @@ body {
     width: 50px;
     border: none;
     border-radius: 5%;
-    color: #fdfdfd;
-    background-color: #509bfd;
+    color: #4a4848;
+    background-color:#4be7b9;
 }
 
 #signup-div button:hover {
-    background-color: #2f7fe8;
+    background-color: #34d2a3;
 }
 
 #signup-anchor {
@@ -78,8 +82,8 @@ body {
 }
 
 #signup-anchor:hover{
-    color: #046cc7
+    color: #34d2a3;
 }
 #signup-anchor:visited{
-    color: hsl(208, 97%, 51%)
+    color: #4be7b9
 }

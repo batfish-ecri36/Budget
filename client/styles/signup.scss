@@ -20,6 +20,10 @@ body {
   
 }
 
+#signup h1 {
+    color:#4be7b9;
+}
+
 #inner-signup p {
     text-align: center;
     margin-bottom: 20px;
@@ -71,11 +75,11 @@ button {
     width: 60px;
     border: none;
     border-radius: 5%;
-    color: #fdfdfd;
-    background-color: #509bfd;
+    color: #4a4848;
+    background-color: #4be7b9;
 }
 
 button:hover {
-    background-color: #2f7fe8;
+    background-color:#34d2a3;
 }
 

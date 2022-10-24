@@ -10,6 +10,7 @@ transactionsController.addTransactions = (req, res, next) => {
     for (let key in req.body) {
       newTransactions.push(req.body[key]);
     }
+    console.log(newTransactions);
     const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
     db.query(text, newTransactions, (err, res) => {
         if (err) {

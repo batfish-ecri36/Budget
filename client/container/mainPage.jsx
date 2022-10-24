@@ -85,9 +85,9 @@ const MainPage = (props) => {
     <div>
       <h1>Peter and Andy are great too!</h1>
         <form onSubmit={handleSubmit}>
-          <input onChange={handleInputChange} type='text' placeholder='Expense' name='expense' defaultValue={item}></input>
+          <input onChange={handleInputChange} type='text' placeholder='Expense' name='item' defaultValue={item}></input>
           <input onChange={handleInputChange} type='number' placeholder='Amount' name='amount' defaultValue={amount}></input>
-          <input onChange={handleInputChange} type='text' placeholder='Category' name='Category' defaultValue={category}></input>
+          <input onChange={handleInputChange} type='text' placeholder='Category' name='category' defaultValue={category}></input>
           <input onChange={handleInputChange} type='date' name='date' defaultValue={date}></input>
           <input type='submit'></input>
         </form>
