@@ -24,9 +24,8 @@ const Popup = (props) => {
         sendObj.amount = amount;
       }
       data = Object.assign({}, data, sendObj);
-      console.log('data', data);
-      console.log(data.user_id);
       const response = await axios.put(`/transactions/${data.user_id}`, data);
+      props.updateTrans(data);
     } catch (error) {
       console.log(error);
     }
@@ -43,16 +42,18 @@ const Popup = (props) => {
         <input id='update-date' type='date'></input>
         <label htmlFor='update-amt'>Amount</label>
         <input id='update-amt'></input>
+        <div id='popup-butt'>
+          <button
+            onClick={() => {
+              updateExpense(props.update);
+              props.setTrigger(false);
+            }}
+          >
+            Submit
+          </button>
+          <button onClick={() => props.setTrigger(false)}>Close</button>
+        </div>
       </div>
-      <button
-        onClick={() => {
-          updateExpense(props.update);
-          console.log('submit', props.update);
-        }}
-      >
-        Submit
-      </button>
-      <button onClick={() => props.setTrigger(false)}>Close</button>
     </div>
   ) : (
     ''

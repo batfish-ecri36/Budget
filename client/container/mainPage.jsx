@@ -1,14 +1,10 @@
 const React = require('react');
 import { useState, useEffect } from 'react';
-import Monthly from '../components/Monthly.jsx';
-import Yearly from '../components/Yearly.jsx';
-import Weekly from '../components/Weekly.jsx';
 import Popup from '../components/Popup.jsx';
 import axios from 'axios';
 import MonthlyBarChart from '../components/Chart.jsx';
 import DoughnutChart from '../components/Doughnut.jsx';
-import styles from '../styles/mainpage.scss'
-
+import styles from '../styles/mainpage.scss';
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -18,7 +14,6 @@ const MainPage = (props) => {
     date: '',
   });
   const [display, setDisplay] = useState('all');
-
 
   console.log(props);
   //will find a way to access user id, but for now i hard coded it
@@ -107,6 +102,7 @@ const MainPage = (props) => {
         trigger={buttonPopup}
         update={updateData}
         setTrigger={setButtonPopup}
+        updateTrans={props.updateTrans}
       >
         <h3>POPUP</h3>
       </Popup>

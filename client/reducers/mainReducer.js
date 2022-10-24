@@ -45,7 +45,22 @@ const mainReducer = (state = initialState, action) => {
       };
     }
     case types.UPDATE_TRANSACTION: {
-      console.log(action.payload);
+      transactions = state.transactions.slice();
+      let current;
+      for (let i = 0; i < transactions.length; i++) {
+        if (transactions[i]._id === action.payload._id) {
+          current = i;
+        }
+      }
+      const updated = Object.assign({}, transactions[current], action.payload);
+      transactions[current] = updated;
+      transactions = transactions.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
+      return {
+        ...state,
+        transactions,
+      };
     }
     default: {
       return { ...state };
