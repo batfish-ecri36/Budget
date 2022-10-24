@@ -3,7 +3,6 @@ const db = require('../models/budgetModel');
 const transactionsController = {};
 
 transactionsController.addTransactions = (req, res, next) => {
-
   //add params id so we can target which user to add the expense to
   const { id } = req.params;
   const { item, amount, date, category } = req.body;
@@ -19,7 +18,6 @@ transactionsController.addTransactions = (req, res, next) => {
       }
     });
     next();
-  
 };
 
 transactionsController.getTransactions = async (req, res, next) => {
@@ -29,15 +27,15 @@ transactionsController.getTransactions = async (req, res, next) => {
   //end with a get request (only from a post request)
 
   // const queryString = req.body.user_id;
-  const text =`SELECT * FROM encrypted_transactions WHERE user_id=${id};`
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  })
-
+  const text = `SELECT * FROM encrypted_transactions WHERE user_id=${id};`;
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };

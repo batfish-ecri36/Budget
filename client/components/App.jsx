@@ -39,6 +39,8 @@ const App = (props) => {
             transactions={props.transactions}
             user={props.user}
             addTrans={props.addTrans}
+            deleteTrans={props.deleteTrans}
+            updateTrans={props.updateTrans}
           />
         }
       />
