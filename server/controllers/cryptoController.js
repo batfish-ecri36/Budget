@@ -39,7 +39,6 @@ cryptoController.decryptData = async (req, res, next) => {
   const key = cipher.keyFromPassword(password);
   res.locals.transactions.forEach(
     (element) => {
-      console.log(element);
       element.item = cipher.decrypt(key, element.item)
     }
   );
