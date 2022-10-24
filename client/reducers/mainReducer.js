@@ -12,11 +12,17 @@ const mainReducer = (state = initialState, action) => {
     case types.LOGIN: {
       const user = action.payload[0];
       transactions = action.payload[1];
+      transactions = transactions.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
       return { ...state, user, transactions };
     }
     case types.ADD_TRANSACTION: {
       transactions = state.transactions.slice();
       transactions.push(action.payload);
+      transactions = transactions.sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
       return {
         ...state,
         transactions,

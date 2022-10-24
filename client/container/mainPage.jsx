@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import Monthly from '../components/Monthly.jsx';
 import Yearly from '../components/Yearly.jsx';
 import Weekly from '../components/Weekly.jsx';
+import Popup from '../components/Popup.jsx';
 import axios from 'axios';
 import MonthlyBarChart from '../components/Chart.jsx';
-('../components/Chart.jsx');
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -89,11 +89,21 @@ const MainPage = (props) => {
     }
   };
 
+  const [buttonPopup, setButtonPopup] = useState(false);
+  const [updateData, setUpdateData] = useState({});
+
   return (
     <div>
       <div>
         <MonthlyBarChart transactions={props.transactions} />
       </div>
+      <Popup
+        trigger={buttonPopup}
+        update={updateData}
+        setTrigger={setButtonPopup}
+      >
+        <h3>POPUP</h3>
+      </Popup>
       <h1>Peter and Andy are great too!</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -135,7 +145,11 @@ const MainPage = (props) => {
         ></input>
         <input type='submit'></input>
       </form>
-      <div className='expense-log' style={{ marginTop: '50px' }}>
+      <div
+        id='expense-div'
+        className='expense-log'
+        style={{ marginTop: '50px' }}
+      >
         <table className='expense-table'>
           <thead>
             <tr>
@@ -203,7 +217,8 @@ const MainPage = (props) => {
                   <td style={{ paddingRight: '10px' }} className='action-btn'>
                     <button
                       onClick={() => {
-                        console.log('click');
+                        setUpdateData(item);
+                        setButtonPopup(true);
                       }}
                     >
                       Edit

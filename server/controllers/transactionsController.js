@@ -58,10 +58,9 @@ transactionsController.deleteTransactions = async (req, res, next) => {
 };
 
 transactionsController.updateTransactions = async (req, res, next) => {
-  const queryString = req.body._id;
-  console.log(queryString);
-  console.log(req.body);
-  const text = `UPDATE transactions SET item = '${req.body.item}', amount = '${req.body.amount}', date = '${req.body.date}', category = '${req.body.category}' WHERE _id = ${queryString}`;
+  const { id } = req.params;
+  const { item, amount, date, category } = req.body.data;
+  const text = `UPDATE transactions SET item = '${item}', amount = '${amount}', date = '${date}', category = '${category}' WHERE _id = ${id}`;
   const result = await db
     .query(text)
     .then((data) => {
