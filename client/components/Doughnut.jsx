@@ -9,10 +9,9 @@ const DoughnutChart = ({transactions}) => {
   const transData = {};  
   const trans = transactions.forEach(item => {
       if(!transData.hasOwnProperty(item.category)){
-          transData[item.category] = item.amount
-      } else {
-          transData[item.category] + item.amount
+          transData[item.category] = Number(item.amount)
       }
+      transData[item.category] += Number(item.amount)
   })
   const label = Object.keys(transData);
   const tableData = Object.values(transData);
@@ -50,7 +49,7 @@ const DoughnutChart = ({transactions}) => {
 
   return (
     <div>     
-      <h1>Doughnut Chart Display</h1>
+      <h1 style={{ width: '500px', margin: 'auto auto'}}>Doughnut Chart Display</h1>
       <Doughnut data={data} style={{ width: '500px', margin: 'auto auto'}}/>
     </div>
   );

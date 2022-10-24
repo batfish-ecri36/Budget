@@ -6,6 +6,7 @@ import Weekly from '../components/Weekly.jsx';
 import axios from 'axios';
 import MonthlyBarChart from '../components/Chart.jsx';
 import DoughnutChart from '../components/Doughnut.jsx';
+import styles from '../styles/mainpage.scss'
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({

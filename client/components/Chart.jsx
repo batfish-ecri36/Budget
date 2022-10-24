@@ -45,9 +45,6 @@ const MonthlyBarChart = ({transactions}) => {
             }
         }
     }, [])
-    console.log(data);
-
-    console.log(transactions);
 
     const convertDate = (date) => {
         const toConvert = new Date(date);
@@ -58,15 +55,19 @@ const MonthlyBarChart = ({transactions}) => {
 
     const transData = {};  
     const trans = transactions.forEach(item => {
-        if(!transData.hasOwnProperty(item.data)){
-            transData[convertDate(item.date)] = item.amount
-        } else {
-            transData[convertDate(item.date)] += item.amount
+        if(!transData.hasOwnProperty(item.date)){
+            transData[convertDate(item.date)] = 0;
+            transData[convertDate(item.date)] += Number(item.amount)
         }
+        console.log(transData[convertDate(item.date)])
+        transData[convertDate(item.date)] += Number(item.amount)
+        console.log('line 67', item.amount) 
     })
+    console.log('line 71',transData)
 
     const labels = Object.keys(transData);
     const tableData = Object.values(transData);
+    console.log('line 75',tableData);
 
     const [chartOptions, setChartOptions] = useState({});
 
