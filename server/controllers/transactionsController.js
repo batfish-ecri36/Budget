@@ -8,19 +8,17 @@ transactionsController.addTransactions = (req, res, next) => {
   const { item, amount, date, category } = req.body;
   //adding the id as the first element to newTransactions
   const newTransactions = [id, item, amount, date, category];
-    console.log(newTransactions);
-    const text = `INSERT INTO encrypted_transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
-    db.query(text, newTransactions, (err, res) => {
-        if (err) {
-          console.log(err.stack)
-        } else {
-          console.log("added to database")
-      }
-    });
-    next();
+  console.log(newTransactions);
+  const text = `INSERT INTO encrypted_transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
+  db.query(text, newTransactions, (err, res) => {
+    if (err) {
+      console.log(err.stack);
+    } else {
+      console.log('added to database');
+    }
+  });
+  next();
 };
-
-
 
 transactionsController.getTransactions = async (req, res, next) => {
   //fixed the query string to accept passed in params
@@ -29,6 +27,7 @@ transactionsController.getTransactions = async (req, res, next) => {
   //end with a get request (only from a post request)
 
   // const queryString = req.body.user_id;
+
 
   const text =`SELECT * FROM encrypted_transactions WHERE user_id=${id}
     ORDER BY date ASC;`
@@ -52,20 +51,19 @@ transactionsController.getCustomTransactions = async (req, res, next) => {
   from encrypted_transactions
   WHERE user_id = ${id} and category='${category}'
   group by ${time}
-  order by ${time} ASC;`
-  
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  })
+  order by ${time} ASC;`;
+
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };
-
-
 
 transactionsController.getMonthlyTransactions = async (req, res, next) => {
   const id = req.params.id;
@@ -77,15 +75,16 @@ transactionsController.getMonthlyTransactions = async (req, res, next) => {
   from encrypted_transactions
   WHERE user_id = ${id}
   group by month
-  order by month ASC;`
-  
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  })
+  order by month ASC;`;
+
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };
@@ -98,15 +97,16 @@ transactionsController.getQuarterlyTransactions = async (req, res, next) => {
   from encrypted_transactions
   WHERE user_id = ${id}
   group by quarter
-  order by quarter ASC;`
-  
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  })
+  order by quarter ASC;`;
+
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };
@@ -119,15 +119,16 @@ transactionsController.getWeeklyTransactions = async (req, res, next) => {
   from encrypted_transactions
   WHERE user_id = ${id}
   group by week
-  order by week ASC;`
-  
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions",error);
-  })
+  order by week ASC;`;
+
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };
@@ -140,15 +141,16 @@ transactionsController.getYearlyTransactions = async (req, res, next) => {
   from encrypted_transactions
   WHERE user_id = ${id}
   group by year
-  order by year ASC;`
-  
-  const result = await db.query(text)
-  .then((data) => {
-    res.locals.transactions = data.rows;
-  })
-  .catch((error) => {
-    console.log("Error getTransactions", error);
-  })
+  order by year ASC;`;
+
+  const result = await db
+    .query(text)
+    .then((data) => {
+      res.locals.transactions = data.rows;
+    })
+    .catch((error) => {
+      console.log('Error getTransactions', error);
+    });
 
   next();
 };
@@ -156,9 +158,7 @@ transactionsController.getYearlyTransactions = async (req, res, next) => {
 transactionsController.deleteTransactions = async (req, res, next) => {
   const { id } = req.params;
   const { item, date } = req.body;
-  console.log(item, date);
-
-  const text = `DELETE FROM encrypted_transactions WHERE _id=${queryString}`;
+  const text = `DELETE FROM encrypted_transactions WHERE _id=${id}`;
   const result = await db
     .query(text)
     .then((data) => {
@@ -172,10 +172,8 @@ transactionsController.deleteTransactions = async (req, res, next) => {
 };
 
 transactionsController.updateTransactions = async (req, res, next) => {
-  const queryString = req.params._id;
-  console.log(queryString);
-  console.log(req.body);
-  const text = `UPDATE encrypted_transactions SET item = '${req.body.item}', amount = '${req.body.amount}', date = '${req.body.date}', category = '${req.body.category}' WHERE _id = ${queryString}`;
+  const { item, amount, date, category, _id } = req.body;
+  const text = `UPDATE transactions SET item = '${item}', amount = '${amount}', date = '${date}', category = '${category}' WHERE _id = ${_id}`;
   const result = await db
     .query(text)
     .then((data) => {
