@@ -151,7 +151,7 @@ const MainPage = (props) => {
           <div
             id="expense-div"
             className="expense-log"
-            style={{ marginTop: "50px" }}
+            style={{ marginTop: "50px", marginLeft: '50px' }}
           >
             <table className="expense-table">
               <thead>
@@ -214,8 +214,8 @@ const MainPage = (props) => {
                 props.transactions.map((item, index) => {
                   return (
                     <tr id={item.item + convertDate(item.date)} key={index}>
-                      <td style={{ paddingRight: "10px" }}>{item.item}</td>
-                      <td style={{ paddingRight: "10px" }}>
+                      <td id='expense' style={{ paddingRight: "10px" }}>{item.item}</td>
+                      <td style={{ paddingRight: "10px", margin: '30px'}}>
                         ${shorten(item.amount)}
                       </td>
                       <td style={{ paddingRight: "10px" }}>{item.category}</td>
@@ -223,7 +223,7 @@ const MainPage = (props) => {
                         {convertDate(item.date)}
                       </td>
                       <td
-                        style={{ paddingRight: "10px" }}
+                        style={{ paddingRight: "10px", marginLeft: '20px' }}
                         className="action-btn"
                       >
                         <button

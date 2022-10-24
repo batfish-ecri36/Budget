@@ -82,7 +82,7 @@ usersController.createUser = async (req, res, next) => {
 
       res.locals.username = user.username;
       console.log("aa");
-      console.log(res.locals.user);
+      console.log(res.locals.username);
       const newEncryptedUser = [];
 
       for (let key in user) {
@@ -108,9 +108,10 @@ usersController.createUser = async (req, res, next) => {
 };
 
 usersController.getUser = async (req, res, next) => {
-  const text = `SELECT * FROM users WHERE username=${res.locals.username}`;
+  const text = `SELECT * FROM users WHERE username=$1`;
+  const array = [res.locals.username];
   const login = await db
-    .query(text)
+    .query(text, array)
     .then((data) => {
       const userData = [data.rows].push([]);
       console.log(userData);
