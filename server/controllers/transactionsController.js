@@ -30,7 +30,8 @@ transactionsController.getTransactions = async (req, res, next) => {
 
   // const queryString = req.body.user_id;
 
-  const text =`SELECT * FROM encrypted_transactions WHERE user_id=${id};`
+  const text =`SELECT * FROM encrypted_transactions WHERE user_id=${id}
+    ORDER BY date ASC;`
   const result = await db.query(text)
   .then((data) => {
     res.locals.transactions = data.rows;
