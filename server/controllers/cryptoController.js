@@ -23,7 +23,7 @@ cryptoController.encryptData = async (req, res, next) => {
 };
 
 cryptoController.decryptData = async (req, res, next) => {
-  const user = [req.body.user_id];
+  const user = [req.params.id];
   let password;
   const text = `SELECT password from users where _id = $1`;
   await db.query(text, user)
