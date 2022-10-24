@@ -4,6 +4,8 @@ import Monthly from '../components/Monthly.jsx';
 import Yearly from '../components/Yearly.jsx';
 import Weekly from '../components/Weekly.jsx';
 import axios from 'axios';
+import MonthlyBarChart from '../components/Chart.jsx';
+import DoughnutChart from '../components/Doughnut.jsx';
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -14,6 +16,8 @@ const MainPage = (props) => {
   });
   const [display, setDisplay] = useState('all');
 
+
+  console.log(props);
   //will find a way to access user id, but for now i hard coded it
   const id = props.user.id;
 
@@ -91,6 +95,10 @@ const MainPage = (props) => {
 
   return (
     <div>
+      <div>
+        <MonthlyBarChart transactions={props.transactions}/>
+        <DoughnutChart transactions={props.transactions} />
+      </div>
       <h1>Peter and Andy are great too!</h1>
       <form onSubmit={handleSubmit}>
         <input
