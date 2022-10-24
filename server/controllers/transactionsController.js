@@ -16,9 +16,16 @@ transactionsController.addTransactions = (req, res, next) => {
     } else {
       console.log('added to database');
     }
-  });
-
-  next();
+    console.log(newTransactions);
+    const text = `INSERT INTO transactions (user_id, item, amount, date, category) VALUES ($1, $2, $3, $4, $5)`;
+    db.query(text, newTransactions, (err, res) => {
+        if (err) {
+          console.log(err.stack)
+        } else {
+          console.log("added to database")
+    }});
+    
+    next();
 
 };
 

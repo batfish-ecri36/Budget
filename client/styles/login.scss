@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+* {
+    margin: 0;
+}
+
+body {  
+    font-family: 'Playfair Display', serif;
+    color:#202124;
+}
+
+#login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    background-color: #333333;
+  
+}
+
+#login h1 {
+    color:#4be7b9;
+}
+
+#inner-login p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#inner-login {
+    background-color: #222222;
+    padding: 100px 150px 100px 150px;
+    color:#fcfcfc;
+    border-radius: 3%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+#inner-login h1 {
+    margin-bottom: 40px;
+}
+
+#login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login-form input {
+    margin-top: 10px;
+    width: 190px;
+    height: 23px;
+    border: none;
+    border-radius: 3%;
+}
+
+#signup-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#signup-div button {
+    margin-top: 6px;
+    padding: 3px;
+    width: 50px;
+    border: none;
+    border-radius: 5%;
+    color: #4a4848;
+    background-color:#4be7b9;
+}
+
+#signup-div button:hover {
+    background-color: #34d2a3;
+}
+
+#signup-anchor {
+    color: #9ba3bc;
+}
+
+#signup-anchor:hover{
+    color: #34d2a3;
+}
+#signup-anchor:visited{
+    color: #4be7b9
+}

@@ -15,6 +15,7 @@ const corsOptions = {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/", express.static(path.resolve(__dirname, "/style.scss")));
 if (process.env.NODE_ENV) {
   app.use('/', express.static(path.join(__dirname, '../dist')));
   //   app.get('/', (req, res) => {

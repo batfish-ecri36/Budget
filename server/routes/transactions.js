@@ -21,12 +21,13 @@ router.post('/:id',
   (req, res) => res.status(200).send("added")
 );
 
-router.put('/',
+router.put('/:id',
   cryptoController.encryptData,
   transactionsController.updateTransactions,
   (req, res) => res.status(200).json(res.locals.transactions)
 
 );
+
 
 router.delete('/:id', transactionsController.deleteTransactions, (req, res) =>
   res.status(200).send('deleted')
