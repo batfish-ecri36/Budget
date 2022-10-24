@@ -6,12 +6,14 @@ import style from '../styles/login.scss';
 
 // const navigate = useNavigate();
 
-const sendUser = async (user, pass, dispatch) => {
+const sendUser = async (user, pass, dispatch, navigate) => {
   const userData = { username: user, password: pass };
   const response = await axios.post('/users/login', userData);
   // all the data associated with that username
   const data = response.data;
+  console.log(data, 'data');
   // create route to main page
+  navigate('/main');
   dispatch(data);
   return;
 };
@@ -20,7 +22,7 @@ const Login = (props) => {
   return (
     <div id='login'>
       <div id='inner-login'>
-        <h1>Site Name</h1>
+        <h1>Stop Spending All Me Money</h1>
         {/* <h1>Wendy and Emily are the best</h1> */}
         <p>Login</p>
         <div id='login-form'>
@@ -44,7 +46,7 @@ const Login = (props) => {
                   pass.style.borderColor = 'red';
                 }
               } else {
-                sendUser(user.value, pass.value, props.login);
+                sendUser(user.value, pass.value, props.login, props.navigate);
               }
             }}
           >
