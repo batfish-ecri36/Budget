@@ -8,16 +8,13 @@ import styles from '../styles/mainpage.scss';
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
-    item: "",
-    category: "",
-    amount: "",
-    date: "",
+    item: '',
+    category: '',
+    amount: '',
+    date: '',
   });
-  
+
   // const [display, setDisplay] = useState('all');
-
-
-  console.log(props);
   //will find a way to access user id, but for now i hard coded it
   const id = props.user.id;
 
@@ -29,12 +26,12 @@ const MainPage = (props) => {
         data
       );
       if (response.status === 200) {
-        window.alert("Expense added successfully!");
+        window.alert('Expense added successfully!');
       }
       props.addTrans(data);
-      const arrBox = Array.from(document.getElementsByClassName("addbox"));
+      const arrBox = Array.from(document.getElementsByClassName('addbox'));
       arrBox.forEach((ele) => {
-        ele.value = "";
+        ele.value = '';
       });
     } catch (err) {
       console.log(err);
@@ -50,8 +47,7 @@ const MainPage = (props) => {
       !e.target[3].value ||
       !e.target[2].value
     ) {
-      console.log("here");
-      window.alert("Please provide value into each input fields.");
+      window.alert('Please provide value into each input fields.');
     } else {
       addExpense(newData);
     }
@@ -68,14 +64,14 @@ const MainPage = (props) => {
 
   const convertDate = (date) => {
     const toConvert = new Date(date);
-    let converted = toConvert.toLocaleDateString("en-US", { timeZone: "UTC" });
+    let converted = toConvert.toLocaleDateString('en-US', { timeZone: 'UTC' });
     return converted;
   };
 
   const shorten = (amount) => {
-    const cut = amount.indexOf(".");
+    const cut = amount.indexOf('.');
     if (cut === -1) {
-      return amount + ".00";
+      return amount + '.00';
     }
     return amount.slice(0, cut + 3);
   };
@@ -95,13 +91,14 @@ const MainPage = (props) => {
   const [updateData, setUpdateData] = useState({});
 
   return (
-    <div id="mainPage">
-        <h1>Stop Spending All Me Money</h1>
+    <div id='mainPage'>
+      <h1>Stop Spending All Me Money</h1>
       <div id='siteName'>
         <div id='trans-form'>
           <Popup
             trigger={buttonPopup}
-            update={updateData}
+            data={updateData}
+            update={props.updateTrans}
             setTrigger={setButtonPopup}
           >
             <h3>POPUP</h3>
@@ -110,98 +107,98 @@ const MainPage = (props) => {
           <form onSubmit={handleSubmit}>
             <p>Add New Expense</p>
             <input
-              className="addbox"
+              className='addbox'
               onChange={handleInputChange}
-              id="item"
-              type="text"
-              placeholder="Expense"
-              name="expense"
+              id='item'
+              type='text'
+              placeholder='Expense'
+              name='expense'
               defaultValue={newData.item}
             ></input>
             <input
-              className="addbox"
+              className='addbox'
               onChange={handleInputChange}
-              id="amount"
-              type="number"
-              placeholder="Amount"
-              name="amount"
-              step="0.01"
-              min="0"
+              id='amount'
+              type='number'
+              placeholder='Amount'
+              name='amount'
+              step='0.01'
+              min='0'
               defaultValue={newData.amount}
             ></input>
             <input
-              className="addbox"
+              className='addbox'
               onChange={handleInputChange}
-              id="category"
-              type="text"
-              placeholder="Category"
-              name="Category"
+              id='category'
+              type='text'
+              placeholder='Category'
+              name='Category'
               defaultValue={newData.category}
             ></input>
             <input
-              className="addbox"
-              id="date"
+              className='addbox'
+              id='date'
               onChange={handleInputChange}
-              type="date"
-              name="date"
+              type='date'
+              name='date'
               defaultValue={newData.date}
             ></input>
-            <input id='submit' type="submit"></input>
+            <input id='submit' type='submit'></input>
           </form>
           <div
-            id="expense-div"
-            className="expense-log"
-            style={{ marginTop: "50px", marginLeft: '50px' }}
+            id='expense-div'
+            className='expense-log'
+            style={{ marginTop: '50px', marginLeft: '50px' }}
           >
-            <table className="expense-table">
+            <table className='expense-table'>
               <thead>
                 <tr>
                   <th
                     style={{
-                      textAlign: "center",
-                      borderBottom: "0.5px solid #767676",
-                      borderRight: " 0.5px solid #767676",
-                      color: "#4be7b9",
+                      textAlign: 'center',
+                      borderBottom: '0.5px solid #767676',
+                      borderRight: ' 0.5px solid #767676',
+                      color: '#4be7b9',
                     }}
                   >
                     Expense:
                   </th>
                   <th
                     style={{
-                      textAlign: "center",
-                      borderBottom: "0.5px solid #767676",
-                      borderRight: " 0.5px solid #767676",
-                      color: "#4be7b9",
+                      textAlign: 'center',
+                      borderBottom: '0.5px solid #767676',
+                      borderRight: ' 0.5px solid #767676',
+                      color: '#4be7b9',
                     }}
                   >
                     Amount:
                   </th>
                   <th
                     style={{
-                      textAlign: "center",
-                      borderBottom: "0.5px solid #767676",
-                      borderRight: " 0.5px solid #767676",
-                      color: "#4be7b9",
+                      textAlign: 'center',
+                      borderBottom: '0.5px solid #767676',
+                      borderRight: ' 0.5px solid #767676',
+                      color: '#4be7b9',
                     }}
                   >
                     Category:
                   </th>
                   <th
                     style={{
-                      textAlign: "center",
-                      borderBottom: "0.5px solid #767676",
-                      borderRight: " 0.5px solid #767676",
-                      color: "#4be7b9",
+                      textAlign: 'center',
+                      borderBottom: '0.5px solid #767676',
+                      borderRight: ' 0.5px solid #767676',
+                      color: '#4be7b9',
                     }}
                   >
                     Date:
                   </th>
                   <th
                     style={{
-                      textAlign: "center",
-                      borderBottom: "0.5px solid #767676",
-                      borderRight: " 0.5px solid #767676",
-                      color: "#4be7b9",
+                      textAlign: 'center',
+                      borderBottom: '0.5px solid #767676',
+                      borderRight: ' 0.5px solid #767676',
+                      color: '#4be7b9',
                     }}
                   >
                     Action:
@@ -214,17 +211,19 @@ const MainPage = (props) => {
                 props.transactions.map((item, index) => {
                   return (
                     <tr id={item.item + convertDate(item.date)} key={index}>
-                      <td id='expense' style={{ paddingRight: "10px" }}>{item.item}</td>
-                      <td style={{ paddingRight: "10px", margin: '30px'}}>
+                      <td id='expense' style={{ paddingRight: '10px' }}>
+                        {item.item}
+                      </td>
+                      <td style={{ paddingRight: '10px', margin: '30px' }}>
                         ${shorten(item.amount)}
                       </td>
-                      <td style={{ paddingRight: "10px" }}>{item.category}</td>
-                      <td style={{ paddingRight: "10px" }}>
+                      <td style={{ paddingRight: '10px' }}>{item.category}</td>
+                      <td style={{ paddingRight: '10px' }}>
                         {convertDate(item.date)}
                       </td>
                       <td
-                        style={{ paddingRight: "10px", marginLeft: '20px' }}
-                        className="action-btn"
+                        style={{ paddingRight: '10px', marginLeft: '20px' }}
+                        className='action-btn'
                       >
                         <button
                           onClick={() => {
@@ -248,7 +247,7 @@ const MainPage = (props) => {
             </tbody>
           </div>
         </div>
-        <div id="charts">
+        <div id='charts'>
           <MonthlyBarChart transactions={props.transactions} />
           <DoughnutChart transactions={props.transactions} />
         </div>
