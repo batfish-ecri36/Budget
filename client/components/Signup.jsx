@@ -36,6 +36,7 @@ const Signup = (props) => {
             placeholder="Confirm Password"
           ></input>
           <div id='signup-submit'>
+            <a id='login-anchor' href='/'>Back to Login</a>
             <button
               id="signup-button"
               onClick={() => {

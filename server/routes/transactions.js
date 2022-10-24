@@ -5,13 +5,14 @@ const cryptoController = require('../controllers/cryptoController');
 
 const router = express.Router();
 
-
 //fixed the endpoint to request an endpoint with an id
-router.get('/:id', 
+router.get(
+  '/:id',
   transactionsController.getTransactions,
   cryptoController.decryptData,
   (req, res) => {
-    res.status(200).json(res.locals.transactions)}
+    res.status(200).json(res.locals.transactions);
+  }
 );
 
 router.get('/custom/:id', 
@@ -43,17 +44,20 @@ router.get('/yearly/:id',
 );
 
 //fixed the endpoint to request an endpoint with an id
-router.post('/:id',
+router.post(
+  '/:id',
   cryptoController.encryptData,
   transactionsController.addTransactions,
-  (req, res) => res.status(200).send("added")
+  (req, res) => res.status(200).send('added')
 );
 
-router.put('/:id',
-  cryptoController.encryptData,
+router.put(
+  '/:id',
+  // cryptoController.encryptData,
   transactionsController.updateTransactions,
   (req, res) => res.status(200).json(res.locals.transactions)
 );
+
 
 
 router.delete('/:id', 
