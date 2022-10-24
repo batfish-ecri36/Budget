@@ -20,19 +20,18 @@ const DoughnutChart = ({transactions}) => {
   console.log('data:', tableData);
 
   const data = {
-
     labels: label,
     datasets: [
       {
         label: "# of Votes",
         data: tableData,
         backgroundColor: [
-          "rgba(255, 99, 132, 0.2)",
-          "rgba(54, 162, 235, 0.2)",
-          "rgba(255, 206, 86, 0.2)",
-          "rgba(75, 192, 192, 0.2)",
-          "rgba(153, 102, 255, 0.2)",
-          "rgba(255, 159, 64, 0.2)",
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 206, 86)",
+          "rgb(75, 192, 192)",
+          "rgb(153, 102, 255)",
+          "rgb(255, 159, 64)",
         ],
         borderColor: [
           "rgba(255, 99, 132, 1)",
@@ -47,10 +46,27 @@ const DoughnutChart = ({transactions}) => {
     ],
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'rgb(53,162,235)',
+        },  
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Transaction Summary",
+        color:'rgb(53,162,235)',
+      },
+    },
+  };
+
   return (
     <div>     
-      <h2 style={{ maxWidth: '400px', margin: 'auto auto', color:'#4be7b9', marginBottom: '10px'}}>Doughnut Chart Display</h2>
-      <Doughnut data={data} style={{ width: '500px', margin: 'auto auto'}}/>
+      <h2 style={{ maxWidth: '300px', margin: 'auto auto', color:'#4be7b9', marginBottom: '10px'}}>Doughnut Chart Display</h2>
+      <Doughnut data={data} options={options} style={{ width: '500px', margin: 'auto auto'}}/>
     </div>
   );
 };

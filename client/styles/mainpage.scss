@@ -2,6 +2,7 @@
 
 * {
     margin: 0;
+    font-weight: bold;
 }
 
 h1, p {
@@ -19,6 +20,7 @@ body {
     font-size: 45px;
     text-align: center;
     align-content: center;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 #siteName {
@@ -32,24 +34,28 @@ body {
     align-items: center;
 }
 
+#trans-form {
+    margin-top: 50px;
+    overflow-y: scroll;
+    height: 800px;
+}
+
 #charts {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 600px;
-    padding-top: 40px;
     margin-right: 40px;
+    margin-top: -190px;
 }
 
+#expense div {
+    margin-left: 50px;
+}
 
 #expense-table th {
     color:#4be7b9;
 }
-
-tr {
-    color: #4be7b9;
-}
-
 
 #updateform {
     display: flex;
@@ -61,7 +67,7 @@ tr {
 input {
     width: 200px;
     height: 20px;
-    margin-top: 6px;
+    margin-top: 10px;
     border: none;
     border-radius: 2%;
     margin-right: 5px;
@@ -83,4 +89,19 @@ input {
     background-color: #34d2a3;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     
+}
+
+#trans-form button {
+    margin-left: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    
+}
+
+td {
+    color: #4be7b9;
+    padding-left: 35px;
 }

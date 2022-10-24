@@ -79,6 +79,9 @@ usersController.createUser = async (req, res, next) => {
         token: req.body.token,
       };
 
+      res.locals.username = user.username;
+      console.log("aa");
+      console.log(res.locals.username);
       const newEncryptedUser = [];
 
       for (let key in user) {
@@ -104,6 +107,7 @@ usersController.createUser = async (req, res, next) => {
   //next();
 };
 
+
 usersController.sendUser = async (req, res, next) => {
   const username = [req.body.username];
   const text =`SELECT * FROM users WHERE username=$1`
@@ -115,7 +119,7 @@ usersController.sendUser = async (req, res, next) => {
   })
   .catch((error) => {
     console.log("Error getTransactions",error);
-  })
+  }
 
   next();
 };
