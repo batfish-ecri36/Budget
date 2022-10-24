@@ -7,7 +7,9 @@ router.get('/', usersController.getUsers, (req, res) =>
 );
 
 router.post('/login', usersController.verifyUser, 
-  usersController.addTransactions, (req, res) => {
+  usersController.addTransactions,
+  cryptoController.decryptData,
+   (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
