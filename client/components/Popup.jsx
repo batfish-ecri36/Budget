@@ -34,6 +34,7 @@ const Popup = (props) => {
   return props.trigger ? (
     <div id='popup'>
       <div id='popup-inner'>
+        <h3>Edit Expense</h3>
         <label htmlFor='update-item'>Item</label>
         <input id='update-item'></input>
         <label htmlFor='update-cat'>Category</label>
@@ -43,7 +44,8 @@ const Popup = (props) => {
         <label htmlFor='update-amt'>Amount</label>
         <input id='update-amt'></input>
         <div id='popup-butt'>
-          <button
+          <button id='submit-edit'
+          style={{marginLeft: '958px'}}
             onClick={() => {
               updateExpense(props.update);
               props.setTrigger(false);
@@ -51,7 +53,7 @@ const Popup = (props) => {
           >
             Submit
           </button>
-          <button onClick={() => props.setTrigger(false)}>Close</button>
+          <button style={{position: 'absolute', top: '16px', right: '20px'}} className='close-btn' onClick={() => props.setTrigger(false)}>Close</button>
         </div>
       </div>
     </div>
