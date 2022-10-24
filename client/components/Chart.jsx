@@ -26,7 +26,6 @@ const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
 
 
 
-
 const MonthlyBarChart = () => {
     const [chartData, setChartData] = useState({
         datasets: []
@@ -47,6 +46,8 @@ const MonthlyBarChart = () => {
 
     const [chartOptions, setChartOptions] = useState({});
 
+    //data has to be a one dimensional array
+    //in this case we can show the monthly total spending 
     useEffect(() => {
         setChartData({
             labels,

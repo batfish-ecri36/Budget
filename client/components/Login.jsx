@@ -8,14 +8,11 @@ import style from "../styles/login.scss";
 
 const sendUser = async (user, pass, dispatch) => {
   const userData = { username: user, password: pass };
-  const response = await axios.post("/users/login", userData);
-  //all the data associated with that username
-  // const data = response.data[1];
-  //username
-  // const username = response.data[0].username;
-  //create route to main page
-  // dispatch(username);
-  dispatch(response);
+  const response = await axios.post('/users/login', userData);
+  // all the data associated with that username
+  const data = response.data;
+  // create route to main page
+  dispatch(data);
   return;
 };
 
