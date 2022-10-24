@@ -18,9 +18,10 @@ router.post(
 );
 
 router.post('/signup', usersController.createUser,
-  usersController.getUser,
-  (req, res) => {
-  res.status(200).send(res.locals.user);
-});
+  usersController.sendUser,
+  (req, res) =>
+  res.status(200).json(res.locals.user)
+);
+
 
 module.exports = router;

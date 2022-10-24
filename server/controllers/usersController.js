@@ -51,7 +51,6 @@ usersController.verifyUser = async (req, res, next) => {
           if (data.rows.length > 0 && result) {
             res.locals.user = [data.rows[0]];
             res.locals.userID = data.rows[0]._id;
-            console.log(res.locals.userID);
             next();
           } else {
             console.log('wrong password or username');
@@ -90,6 +89,7 @@ usersController.createUser = async (req, res, next) => {
       }
 
       console.log(newEncryptedUser);
+      res.locals.username = req.body.username;
 
       const text = `INSERT INTO users (username, password, token) VALUES ($1, $2, $3)`;
       db.query(text, newEncryptedUser, (err, res) => {
@@ -107,22 +107,21 @@ usersController.createUser = async (req, res, next) => {
   //next();
 };
 
-usersController.getUser = async (req, res, next) => {
-  const text = `SELECT * FROM users WHERE username=$1`;
-  const array = [res.locals.username];
-  const login = await db
-    .query(text, array)
-    .then((data) => {
-      const userData = [data.rows].push([]);
-      console.log(userData);
-      res.locals.user = userData;
-    })
-    .catch((error) => {
-      console.log('Error getUser', error);
-    });
+
+usersController.sendUser = async (req, res, next) => {
+  const username = [req.body.username];
+  const text =`SELECT * FROM users WHERE username=$1`
+  const result = await db.query(text, username)
+  .then((data) => {
+
+    res.locals.user = [data.rows[0]];
+    res.locals.user.push([]);
+  })
+  .catch((error) => {
+    console.log("Error getTransactions",error);
+  }
 
   next();
 };
-
 
 module.exports = usersController;
