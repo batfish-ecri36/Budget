@@ -49,7 +49,7 @@ const DoughnutChart = ({transactions}) => {
 
   return (
     <div>     
-      <h1 style={{ width: '500px', margin: 'auto auto'}}>Doughnut Chart Display</h1>
+      <h2 style={{ maxWidth: '400px', margin: 'auto auto', color:'#4be7b9', marginBottom: '10px'}}>Doughnut Chart Display</h2>
       <Doughnut data={data} style={{ width: '500px', margin: 'auto auto'}}/>
     </div>
   );

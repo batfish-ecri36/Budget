@@ -4,7 +4,83 @@
     margin: 0;
 }
 
+h1, p {
+    color:#4be7b9;
+}
+
 body {  
     font-family: 'Playfair Display', serif;
-    color:#202124;
+    // background-color: #333333
+}
+
+#mainPage h1 {
+    background-color: #222222;
+    padding: 30px;
+    font-size: 45px;
+    text-align: center;
+    align-content: center;
+}
+
+#siteName {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#mainPage{
+    justify-content: space-between;
+    align-items: center;
+}
+
+#charts {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 600px;
+    padding-top: 40px;
+    margin-right: 40px;
+}
+
+
+#expense-table th {
+    color:#4be7b9;
+}
+
+tr {
+    color: #4be7b9;
+}
+
+
+#updateform {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    padding: 25px 50px;
+}
+
+input {
+    width: 200px;
+    height: 20px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 2%;
+    margin-right: 5px;
+    // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#submit {
+    margin-top: 6px;
+    padding: 4px;
+    width: 55px;
+    height: 22px;
+    border: none;
+    border-radius: 5%;
+    color: #4a4848;
+    background-color:#4be7b9;
+}
+
+#submit:hover {
+    background-color: #34d2a3;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    
 }
