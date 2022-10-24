@@ -1,16 +1,8 @@
 import * as types from '../constants/actiontypes';
 
-// {
-//     date:
-//     item:
-//     amount:
-//     category:
-// }
-
 const initialState = {
   transactions: [],
   user: '',
-  //can add a total
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -31,7 +23,20 @@ const mainReducer = (state = initialState, action) => {
       };
     }
     case types.DELETE_TRANSACTION: {
-      console.log(action.payload);
+      transactions = state.transactions.slice();
+      let cut;
+      for (let i = 0; i < transactions.length; i++) {
+        if (transactions[i]._id === action.payload) {
+          cut = i;
+        }
+      }
+      transactions = transactions
+        .slice(0, cut)
+        .concat(transactions.slice(cut + 1));
+      return {
+        ...state,
+        transactions,
+      };
     }
     case types.UPDATE_TRANSACTION: {
       console.log(action.payload);

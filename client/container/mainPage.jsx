@@ -4,6 +4,8 @@ import Monthly from '../components/Monthly.jsx';
 import Yearly from '../components/Yearly.jsx';
 import Weekly from '../components/Weekly.jsx';
 import axios from 'axios';
+import MonthlyBarChart from '../components/Chart.jsx';
+('../components/Chart.jsx');
 
 const MainPage = (props) => {
   const [newData, setNewData] = useState({
@@ -29,7 +31,6 @@ const MainPage = (props) => {
       }
       props.addTrans(data);
       const arrBox = Array.from(document.getElementsByClassName('addbox'));
-      console.log(arrBox);
       arrBox.forEach((ele) => {
         ele.value = '';
       });
@@ -78,12 +79,11 @@ const MainPage = (props) => {
   };
 
   const deleteExpense = async (data) => {
-    console.log(data);
     try {
-      const response = await axios.delete(`/transactions/${props.user._id}`, {
+      const response = await axios.delete(`/transactions/${data}`, {
         data,
       });
-      // props.deleteTrans(data)
+      props.deleteTrans(data);
     } catch (error) {
       console.log(error);
     }
@@ -91,6 +91,9 @@ const MainPage = (props) => {
 
   return (
     <div>
+      <div>
+        <MonthlyBarChart transactions={props.transactions} />
+      </div>
       <h1>Peter and Andy are great too!</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -207,14 +210,7 @@ const MainPage = (props) => {
                     </button>
                     <button
                       onClick={() => {
-                        console.log(item.item, convertDate(item.date));
-                        const toDelete = {
-                          item: item.item,
-                          date: item.date,
-                          category: item.category,
-                          amount: item.amount,
-                        };
-                        deleteExpense(toDelete);
+                        deleteExpense(item._id);
                       }}
                     >
                       Delete
@@ -237,4 +233,3 @@ export default MainPage;
   <option value='year'>Year</option>
 </select>; */
 }
-
