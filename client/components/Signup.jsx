@@ -14,7 +14,7 @@ const Signup = (props) => {
   return (
     <div id="signup">
       <div id="inner-signup">
-        <h1>Site Name</h1>
+        <h1>Stop Spending All Me Money</h1>
         <p>Signup</p>
         <div id="signup-form">
           <input

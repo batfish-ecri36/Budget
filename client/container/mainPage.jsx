@@ -96,9 +96,9 @@ const MainPage = (props) => {
 
   return (
     <div id="mainPage">
-        <h1>Site Name</h1>
+        <h1>Stop Spending All Me Money</h1>
       <div id='siteName'>
-        <div>
+        <div id='trans-form'>
           <Popup
             trigger={buttonPopup}
             update={updateData}
@@ -184,7 +184,7 @@ const MainPage = (props) => {
                       color: "#4be7b9",
                     }}
                   >
-                    Date:
+                    Category:
                   </th>
                   <th
                     style={{
@@ -194,7 +194,7 @@ const MainPage = (props) => {
                       color: "#4be7b9",
                     }}
                   >
-                    Category:
+                    Date:
                   </th>
                   <th
                     style={{

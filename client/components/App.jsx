@@ -25,10 +25,6 @@ const mapDispatchToProps = (dispatch) => ({
 const App = (props) => {
   const navigate = useNavigate();
   const [authenticated, changeAuthenticated] = useState(false);
-  // if (props.user && authenticated === false) {
-  //   changeAuthenticated(true);
-  //   navigate('/main');
-  // }
   return (
     <Routes>
       <Route

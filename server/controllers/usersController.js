@@ -80,6 +80,9 @@ usersController.createUser = async (req, res, next) => {
         token: req.body.token,
       };
 
+      res.locals.username = user.username;
+      console.log("aa");
+      console.log(res.locals.user);
       const newEncryptedUser = [];
 
       for (let key in user) {
@@ -103,5 +106,22 @@ usersController.createUser = async (req, res, next) => {
 
   //next();
 };
+
+usersController.getUser = async (req, res, next) => {
+  const text = `SELECT * FROM users WHERE username=${res.locals.username}`;
+  const login = await db
+    .query(text)
+    .then((data) => {
+      const userData = [data.rows].push([]);
+      console.log(userData);
+      res.locals.user = userData;
+    })
+    .catch((error) => {
+      console.log('Error getUser', error);
+    });
+
+  next();
+};
+
 
 module.exports = usersController;

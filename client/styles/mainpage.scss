@@ -32,13 +32,19 @@ body {
     align-items: center;
 }
 
+#trans-form {
+    margin-top: 50px;
+    overflow-y: scroll;
+    height: 800px;
+}
+
 #charts {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 600px;
-    padding-top: 40px;
     margin-right: 40px;
+    margin-top: -160px;
 }
 
 

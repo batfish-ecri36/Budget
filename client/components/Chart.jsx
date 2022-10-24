@@ -80,7 +80,7 @@ const MonthlyBarChart = ({ transactions }) => {
     plugins: {
       legend: {
         labels: {
-          fontColor: '#4be7b9',
+          color: '#4be7b9',
         },  
         position: "bottom",
       },
@@ -89,6 +89,14 @@ const MonthlyBarChart = ({ transactions }) => {
         text: "Transaction Summary",
       },
     },
+    scales: {
+      y: {
+        ticks: {color: '#4be7b9'}
+      },
+      x: {
+        ticks: {color: '#4be7b9'}
+      }
+    }
   };
 
   const barData = {
@@ -98,13 +106,13 @@ const MonthlyBarChart = ({ transactions }) => {
         label: "Daily Spending",
         data: tableData,
         borderColor: "rgb(53,162,235)",
-        backgroundColor: "rgba(52,162,235,0.4)",
+        backgroundColor: "rgba(52,162,235,0.6)",
       },
     ],
   }
   
   return (
-    <div style={{ width: "700px", margin: "auto auto", color:'#4be7b9'}}>
+    <div style={{ width: "700px", color:'#4be7b9', marginBottom: '10px'}}>
       <h2>Bar Chart Display</h2>
       <Bar options={options} data={barData} />
     </div>
