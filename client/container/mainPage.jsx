@@ -1,127 +1,239 @@
-const React = require("react");
-import { useState, useEffect } from "react";
-import Transactions from "../components/Transactions.jsx";
-import Monthly from "../components/Monthly.jsx";
-import Yearly from "../components/Yearly.jsx";
-import Weekly from "../components/Weekly.jsx";
-import axios from "axios";
-
-const initialState = {
-  item: '',
-  amount: '',
-  date: '',
-  category: '',
-}
+const React = require('react');
+import { useState, useEffect } from 'react';
+import Monthly from '../components/Monthly.jsx';
+import Yearly from '../components/Yearly.jsx';
+import Weekly from '../components/Weekly.jsx';
+import axios from 'axios';
 
 const MainPage = (props) => {
-  const transArray = [];
-  props.transactions.forEach((transaction) => {
-    <Transactions
-      date={transaction.date}
-      item={transaction.item}
-      amount={transaction.amount}
-      category={transaction.category}
-    />;
+  const [newData, setNewData] = useState({
+    item: '',
+    category: '',
+    amount: '',
+    date: '',
   });
+  const [display, setDisplay] = useState('all');
 
   //will find a way to access user id, but for now i hard coded it
-  const id = 11;
+  const id = props.user.id;
 
-  const [state, setState] = useState(initialState);
-  const { item, amount, date, category} = initialState;
-
-  const [transactions, setTransactions] = useState([]);
-
-  //how to access the current user in state?
-
-  const getExpenses = async () => {
-    const requestOptions = {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({})
-    };
-    //can only access data from back by send a get request with an id passed in
-    const response = await fetch(`/transactions/${id}`);
-    const data = await response.json();
-    console.log(data);
-    setTransactions(data);
-  };
-
-  //post request to add new transactions to the database
+  // post request to add new transactions to the database
   const addExpense = async (data) => {
-    console.log(data);
     try {
-      const response = await axios.post(`/transactions/${id}`, data);
-      if(response.status === 200){
+      const response = await axios.post(
+        `/transactions/${props.user._id}`,
+        data
+      );
+      if (response.status === 200) {
         window.alert('Expense added successfully!');
       }
+      props.addTrans(data);
+      const arrBox = Array.from(document.getElementsByClassName('addbox'));
+      console.log(arrBox);
+      arrBox.forEach((ele) => {
+        ele.value = '';
+      });
+    } catch (err) {
+      console.log(err);
     }
-    catch(err) {
-      console.log(err)
-    }
-  }
-
-  useEffect(() => {
-    getExpenses();
-  }, []);
+  };
 
   //handleSubmit form to invoke addExpense function (post request) passing in the new state
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (item === null || amount === null || date === null) {
-      window.alert("Please provide value into each input fields.");
+    if (
+      !e.target[0].value ||
+      !e.target[1].value ||
+      !e.target[3].value ||
+      !e.target[2].value
+    ) {
+      console.log('here');
+      window.alert('Please provide value into each input fields.');
     } else {
-      addExpense(state)
+      addExpense(newData);
     }
   };
 
-  //handle input onChange
+  // handle input onChange
   const handleInputChange = (e) => {
-    let { name, value } = e.target;
-    setState({ ...state, [name]: value });
+    const target = {};
+    target[e.target.id] = e.target.value;
+    // let { name, value } = e.target;
+    const newObj = Object.assign({}, newData, target);
+    setNewData(newObj);
+  };
+
+  const convertDate = (date) => {
+    const toConvert = new Date(date);
+    let converted = toConvert.toLocaleDateString('en-US', { timeZone: 'UTC' });
+    return converted;
+  };
+
+  const shorten = (amount) => {
+    const cut = amount.indexOf('.');
+    if (cut === -1) {
+      return amount + '.00';
+    }
+    return amount.slice(0, cut + 3);
+  };
+
+  const deleteExpense = async (data) => {
+    console.log(data);
+    try {
+      const response = await axios.delete(`/transactions/${props.user._id}`, {
+        data,
+      });
+      // props.deleteTrans(data)
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
       <h1>Peter and Andy are great too!</h1>
-        <form onSubmit={handleSubmit}>
-          <input onChange={handleInputChange} type='text' placeholder='Expense' name='expense' defaultValue={item}></input>
-          <input onChange={handleInputChange} type='number' placeholder='Amount' name='amount' defaultValue={amount}></input>
-          <input onChange={handleInputChange} type='text' placeholder='Category' name='Category' defaultValue={category}></input>
-          <input onChange={handleInputChange} type='date' name='date' defaultValue={date}></input>
-          <input type='submit'></input>
-        </form>
-        <div className='expense-log' style={{ marginTop: "50px" }}>
-          <table className='expense-table'>
-            <thead>
-              <tr>
-                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676'}}>Expense:</th>
-                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Amount:</th>
-                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Date:</th>
-                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Category:</th>
-                <th style={{ textAlign: "center", borderBottom: '0.5px solid #767676', borderRight: ' 0.5px solid #767676' }}>Action:</th>
-              </tr>
-            </thead>
-          </table>
-          <tbody>
-            {transactions && transactions.map((item, index) => {
+      <form onSubmit={handleSubmit}>
+        <input
+          className='addbox'
+          onChange={handleInputChange}
+          id='item'
+          type='text'
+          placeholder='Expense'
+          name='expense'
+          defaultValue={newData.item}
+        ></input>
+        <input
+          className='addbox'
+          onChange={handleInputChange}
+          id='amount'
+          type='number'
+          placeholder='Amount'
+          name='amount'
+          step='0.01'
+          min='0'
+          defaultValue={newData.amount}
+        ></input>
+        <input
+          className='addbox'
+          onChange={handleInputChange}
+          id='category'
+          type='text'
+          placeholder='Category'
+          name='Category'
+          defaultValue={newData.category}
+        ></input>
+        <input
+          className='addbox'
+          id='date'
+          onChange={handleInputChange}
+          type='date'
+          name='date'
+          defaultValue={newData.date}
+        ></input>
+        <input type='submit'></input>
+      </form>
+      <div className='expense-log' style={{ marginTop: '50px' }}>
+        <table className='expense-table'>
+          <thead>
+            <tr>
+              <th
+                style={{
+                  textAlign: 'center',
+                  borderBottom: '0.5px solid #767676',
+                  borderRight: ' 0.5px solid #767676',
+                }}
+              >
+                Expense:
+              </th>
+              <th
+                style={{
+                  textAlign: 'center',
+                  borderBottom: '0.5px solid #767676',
+                  borderRight: ' 0.5px solid #767676',
+                }}
+              >
+                Amount:
+              </th>
+              <th
+                style={{
+                  textAlign: 'center',
+                  borderBottom: '0.5px solid #767676',
+                  borderRight: ' 0.5px solid #767676',
+                }}
+              >
+                Date:
+              </th>
+              <th
+                style={{
+                  textAlign: 'center',
+                  borderBottom: '0.5px solid #767676',
+                  borderRight: ' 0.5px solid #767676',
+                }}
+              >
+                Category:
+              </th>
+              <th
+                style={{
+                  textAlign: 'center',
+                  borderBottom: '0.5px solid #767676',
+                  borderRight: ' 0.5px solid #767676',
+                }}
+              >
+                Action:
+              </th>
+            </tr>
+          </thead>
+        </table>
+        <tbody>
+          {props.transactions &&
+            props.transactions.map((item, index) => {
               return (
-                <tr key={index}>
-                  <td style={{ paddingRight: '10px'}}>{item.item}</td>
-                  <td style={{ paddingRight: '10px'}}>${item.amount}</td>
-                  <td style={{ paddingRight: '10px'}}>{item.category}</td>
-                  <td style={{ paddingRight: '10px'}}>{item.date}</td>
-                  <td style={{ paddingRight: '10px'}} className='action-btn'>
-                    <button>Edit</button>
-                    <button>Delete</button>
+                <tr id={item.item + convertDate(item.date)} key={index}>
+                  <td style={{ paddingRight: '10px' }}>{item.item}</td>
+                  <td style={{ paddingRight: '10px' }}>
+                    ${shorten(item.amount)}
+                  </td>
+                  <td style={{ paddingRight: '10px' }}>{item.category}</td>
+                  <td style={{ paddingRight: '10px' }}>
+                    {convertDate(item.date)}
+                  </td>
+                  <td style={{ paddingRight: '10px' }} className='action-btn'>
+                    <button
+                      onClick={() => {
+                        console.log('click');
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => {
+                        console.log(item.item, convertDate(item.date));
+                        const toDelete = {
+                          item: item.item,
+                          date: item.date,
+                          category: item.category,
+                          amount: item.amount,
+                        };
+                        deleteExpense(toDelete);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
-              )
+              );
             })}
-          </tbody>
-        </div>
+        </tbody>
+      </div>
     </div>
-  )
-
-}
+  );
+};
 export default MainPage;
+
+{
+  /* <select id='dropdown'>
+  <option value='week'>Week</option>
+  <option value='month'>Month</option>
+  <option value='year'>Year</option>
+</select>; */
+}

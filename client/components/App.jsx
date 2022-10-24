@@ -15,10 +15,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   login: (user) => dispatch(actions.login(user)),
+  addTrans: (transaction) => dispatch(actions.addTransaction(transaction)),
+  deleteTrans: (transaction) =>
+    dispatch(actions.deleteTransaction(transaction)),
+  updateTrans: (transaction) =>
+    dispatch(actions.updateTransactions(transaction)),
 });
 
 const App = (props) => {
-
   const navigate = useNavigate();
   const [authenticated, changeAuthenticated] = useState(false);
   if (props.user && authenticated === false) {
@@ -27,11 +31,16 @@ const App = (props) => {
   }
   return (
     <Routes>
-      
       <Route path='/' element={<Login login={props.login} />} />
       <Route
         path='/main'
-        element={<MainPage transactions={props.transactions} />}
+        element={
+          <MainPage
+            transactions={props.transactions}
+            user={props.user}
+            addTrans={props.addTrans}
+          />
+        }
       />
       <Route path='/chart' element={<MonthlyBarChart />} />
       <Route path='/doughnut' element={<DoughnutChart />} />
