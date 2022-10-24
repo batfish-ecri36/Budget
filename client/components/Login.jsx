@@ -2,7 +2,7 @@ const React = require("react");
 import { useState } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import style from "../styles/navbar.scss";
+import style from "../styles/login.scss";
 
 // const navigate = useNavigate();
 
