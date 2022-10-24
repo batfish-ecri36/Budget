@@ -5,6 +5,8 @@ const cryptoController = require('../controllers/cryptoController');
 
 const router = express.Router();
 
+
+//fixed the endpoint to request an endpoint with an id
 router.get('/:id', 
   transactionsController.getTransactions,
   cryptoController.decryptData,
@@ -12,7 +14,7 @@ router.get('/:id',
     res.status(200).json(res.locals.transactions)}
 );
 
-
+//fixed the endpoint to request an endpoint with an id
 router.post('/:id',
   cryptoController.encryptData,
   transactionsController.addTransactions,
@@ -23,11 +25,11 @@ router.put('/',
   cryptoController.encryptData,
   transactionsController.updateTransactions,
   (req, res) => res.status(200).json(res.locals.transactions)
+
 );
 
-router.delete('/',
-  transactionsController.deleteTransactions,
-  (req, res) => res.status(200).send("deleted")
+router.delete('/:id', transactionsController.deleteTransactions, (req, res) =>
+  res.status(200).send('deleted')
 );
 
 module.exports = router;
